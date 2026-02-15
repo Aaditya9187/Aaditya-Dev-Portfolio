@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -6,6 +7,7 @@ const links = [
   { label: "About", href: "#about" },
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
+  { label: "Blog", href: "/blogs" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -23,12 +25,21 @@ const Navbar = () => {
         <ul className="hidden md:flex items-center gap-8">
           {links.map((l) => (
             <li key={l.href}>
-              <a
-                href={l.href}
-                className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
-              >
-                {l.label}
-              </a>
+              {l.href.startsWith("/") ? (
+                <Link
+                  to={l.href}
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+                >
+                  {l.label}
+                </Link>
+              ) : (
+                <a
+                  href={l.href}
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+                >
+                  {l.label}
+                </a>
+              )}
             </li>
           ))}
           <li>
@@ -63,13 +74,23 @@ const Navbar = () => {
             <ul className="flex flex-col gap-4 px-6 py-6">
               {links.map((l) => (
                 <li key={l.href}>
-                  <a
-                    href={l.href}
-                    onClick={() => setOpen(false)}
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {l.label}
-                  </a>
+                  {l.href.startsWith("/") ? (
+                    <Link
+                      to={l.href}
+                      onClick={() => setOpen(false)}
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {l.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={l.href}
+                      onClick={() => setOpen(false)}
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      {l.label}
+                    </a>
+                  )}
                 </li>
               ))}
               <li>
