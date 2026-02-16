@@ -1,11 +1,16 @@
 import { motion } from "framer-motion";
 import { ExternalLink, Github } from "lucide-react";
+import projectEcommerce from "@/assets/project-ecommerce.jpg";
+import projectPortfolio from "@/assets/project-portfolio.jpg";
+import projectIot from "@/assets/project-iot.jpg";
+import projectTaskmanager from "@/assets/project-taskmanager.jpg";
 
 const projects = [
   {
     title: "E-Commerce Dashboard",
     desc: "A modern admin dashboard with real-time analytics, inventory management, and responsive charts built for an online store.",
     tools: ["React", "Tailwind CSS", "Recharts", "Node.js"],
+    image: projectEcommerce,
     github: "#",
     live: "#",
   },
@@ -13,6 +18,7 @@ const projects = [
     title: "Portfolio Template",
     desc: "A clean, animated portfolio template for developers and designers with dark mode, smooth scroll, and dynamic sections.",
     tools: ["React", "Framer Motion", "TypeScript"],
+    image: projectPortfolio,
     github: "#",
     live: "#",
   },
@@ -20,6 +26,7 @@ const projects = [
     title: "Smart Home IoT Controller",
     desc: "Web-based IoT dashboard to control home devices remotely using Arduino and MQTT protocol with real-time status updates.",
     tools: ["JavaScript", "Arduino", "MQTT", "Express"],
+    image: projectIot,
     github: "#",
     live: "#",
   },
@@ -27,6 +34,7 @@ const projects = [
     title: "Task Management App",
     desc: "A full-stack Kanban-style task manager with drag-and-drop, user authentication, and cloud sync capabilities.",
     tools: ["React", "Node.js", "MongoDB", "Tailwind"],
+    image: projectTaskmanager,
     github: "#",
     live: "#",
   },
@@ -58,6 +66,14 @@ const ProjectsSection = () => {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className="glass rounded-xl p-6 hover-lift group"
             >
+              <div className="rounded-lg overflow-hidden mb-4">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+              </div>
               <div className="flex items-start justify-between mb-4">
                 <h3 className="text-xl font-semibold group-hover:text-primary transition-colors">
                   {project.title}
