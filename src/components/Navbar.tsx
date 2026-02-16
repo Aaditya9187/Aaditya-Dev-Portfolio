@@ -1,7 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, User, LogOut } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 const links = [
   { label: "About", href: "#about" },
@@ -13,6 +15,9 @@ const links = [
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const { user, signOut } = useAuth();
+  const location = useLocation();
+  const isBlogSection = location.pathname.startsWith("/blog") || location.pathname === "/blogs" || location.pathname === "/auth";
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass">
@@ -50,6 +55,22 @@ const Navbar = () => {
               Hire Me
             </a>
           </li>
+          {isBlogSection && user && (
+            <li className="flex items-center gap-2">
+              <Avatar className="h-8 w-8 border border-border">
+                <AvatarFallback className="bg-primary/10 text-primary text-xs">
+                  {user.email?.charAt(0).toUpperCase() || <User size={14} />}
+                </AvatarFallback>
+              </Avatar>
+              <button
+                onClick={signOut}
+                className="text-muted-foreground hover:text-primary transition-colors"
+                aria-label="Sign out"
+              >
+                <LogOut size={16} />
+              </button>
+            </li>
+          )}
         </ul>
 
         {/* Mobile toggle */}
@@ -102,6 +123,23 @@ const Navbar = () => {
                   Hire Me
                 </a>
               </li>
+              {isBlogSection && user && (
+                <li className="flex items-center gap-3 pt-2 border-t border-border">
+                  <Avatar className="h-8 w-8 border border-border">
+                    <AvatarFallback className="bg-primary/10 text-primary text-xs">
+                      {user.email?.charAt(0).toUpperCase() || <User size={14} />}
+                    </AvatarFallback>
+                  </Avatar>
+                  <span className="text-sm text-muted-foreground truncate">{user.email}</span>
+                  <button
+                    onClick={() => { signOut(); setOpen(false); }}
+                    className="ml-auto text-muted-foreground hover:text-primary transition-colors"
+                    aria-label="Sign out"
+                  >
+                    <LogOut size={16} />
+                  </button>
+                </li>
+              )}
             </ul>
           </motion.div>
         )}
