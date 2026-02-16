@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useState, useCallback } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, User, LogOut } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
@@ -18,7 +18,22 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const { user, signOut } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
   const isBlogSection = location.pathname.startsWith("/blog") || location.pathname === "/blogs" || location.pathname === "/auth";
+
+  const handleNavClick = useCallback((href: string) => {
+    setOpen(false);
+    if (href.includes("#")) {
+      const hash = href.split("#")[1];
+      if (location.pathname === "/") {
+        document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" });
+      } else {
+        navigate("/#" + hash);
+      }
+    } else {
+      navigate(href);
+    }
+  }, [location.pathname, navigate]);
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass">
@@ -31,30 +46,21 @@ const Navbar = () => {
         <ul className="hidden md:flex items-center gap-8">
           {links.map((l) => (
             <li key={l.href}>
-              {l.href.startsWith("/") ? (
-                <Link
-                  to={l.href}
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
-                >
-                  {l.label}
-                </Link>
-              ) : (
-                <a
-                  href={l.href}
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
-                >
-                  {l.label}
-                </a>
-              )}
+              <button
+                onClick={() => handleNavClick(l.href)}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+              >
+                {l.label}
+              </button>
             </li>
           ))}
           <li>
-            <a
-              href="#contact"
+            <button
+              onClick={() => handleNavClick("/#contact")}
               className="text-sm bg-primary text-primary-foreground px-4 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity"
             >
               Hire Me
-            </a>
+            </button>
           </li>
           {isBlogSection && user && (
             <li className="flex items-center gap-2">
@@ -96,33 +102,21 @@ const Navbar = () => {
             <ul className="flex flex-col gap-4 px-6 py-6">
               {links.map((l) => (
                 <li key={l.href}>
-                  {l.href.startsWith("/") ? (
-                    <Link
-                      to={l.href}
-                      onClick={() => setOpen(false)}
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      {l.label}
-                    </Link>
-                  ) : (
-                    <a
-                      href={l.href}
-                      onClick={() => setOpen(false)}
-                      className="text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      {l.label}
-                    </a>
-                  )}
+                  <button
+                    onClick={() => handleNavClick(l.href)}
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {l.label}
+                  </button>
                 </li>
               ))}
               <li>
-                <a
-                  href="#contact"
-                  onClick={() => setOpen(false)}
+                <button
+                  onClick={() => handleNavClick("/#contact")}
                   className="inline-block bg-primary text-primary-foreground px-4 py-2 rounded-lg font-medium"
                 >
                   Hire Me
-                </a>
+                </button>
               </li>
               {isBlogSection && user && (
                 <li className="flex items-center gap-3 pt-2 border-t border-border">

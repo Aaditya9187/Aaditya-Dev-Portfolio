@@ -7,8 +7,9 @@ const ContactSection = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Placeholder
-    alert("Thanks for reaching out! I'll get back to you soon.");
+    const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`);
+    const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`);
+    window.location.href = `mailto:aaditya@example.com?subject=${subject}&body=${body}`;
     setForm({ name: "", email: "", message: "" });
   };
 
