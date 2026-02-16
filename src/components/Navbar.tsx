@@ -6,11 +6,12 @@ import { useAuth } from "@/hooks/useAuth";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 const links = [
-  { label: "About", href: "#about" },
-  { label: "Skills", href: "#skills" },
-  { label: "Projects", href: "#projects" },
+  { label: "Home", href: "/" },
+  { label: "About", href: "/#about" },
+  { label: "Skills", href: "/#skills" },
+  { label: "Projects", href: "/#projects" },
   { label: "Blog", href: "/blogs" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const Navbar = () => {
@@ -22,9 +23,9 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-        <a href="#" className="text-xl font-bold font-mono text-gradient">
+        <Link to="/" className="text-xl font-bold font-mono text-gradient">
           &lt;Aaditya /&gt;
-        </a>
+        </Link>
 
         {/* Desktop */}
         <ul className="hidden md:flex items-center gap-8">
