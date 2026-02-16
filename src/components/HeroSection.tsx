@@ -32,12 +32,14 @@ const HeroSection = () => {
           <div className="flex flex-wrap gap-4">
             <a
               href="#projects"
+              onClick={(e) => { e.preventDefault(); document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" }); }}
               className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity glow-primary"
             >
               See My Work <ArrowDown size={16} />
             </a>
             <a
               href="#contact"
+              onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
               className="inline-flex items-center gap-2 border border-border text-foreground px-6 py-3 rounded-lg font-medium hover:border-primary hover:text-primary transition-colors"
             >
               Contact Me <Send size={16} />
