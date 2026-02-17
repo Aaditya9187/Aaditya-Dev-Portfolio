@@ -56,6 +56,48 @@ export type Database = {
         }
         Relationships: []
       }
+      projects: {
+        Row: {
+          cover_image: string | null
+          created_at: string
+          description: string
+          display_order: number | null
+          github_url: string | null
+          id: string
+          live_url: string | null
+          tags: string[] | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cover_image?: string | null
+          created_at?: string
+          description: string
+          display_order?: number | null
+          github_url?: string | null
+          id?: string
+          live_url?: string | null
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cover_image?: string | null
+          created_at?: string
+          description?: string
+          display_order?: number | null
+          github_url?: string | null
+          id?: string
+          live_url?: string | null
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
