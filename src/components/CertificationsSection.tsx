@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { Award } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
-const certs = [
+const staticCerts = [
   { name: "Responsive Web Design", issuer: "freeCodeCamp" },
   { name: "JavaScript Algorithms", issuer: "freeCodeCamp" },
   { name: "UX Design Fundamentals", issuer: "Google" },
@@ -10,6 +12,19 @@ const certs = [
 ];
 
 const CertificationsSection = () => {
+  const { data: dbCerts } = useQuery({
+    queryKey: ["certificates"],
+    queryFn: async () => {
+      const { data, error } = await supabase.from("certificates").select("*").order("display_order");
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  const certs = dbCerts && dbCerts.length > 0
+    ? dbCerts.map(c => ({ name: c.name, issuer: c.issuer }))
+    : staticCerts;
+
   return (
     <section className="section-padding bg-card/40">
       <div className="max-w-7xl mx-auto">
