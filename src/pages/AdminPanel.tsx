@@ -14,7 +14,6 @@ import { toast } from "sonner";
 
 type Tab = "projects" | "blogs" | "certificates";
 
-/* ───── Project form ───── */
 interface ProjectForm {
   title: string;
   description: string;
@@ -26,7 +25,6 @@ interface ProjectForm {
 }
 const emptyProject: ProjectForm = { title: "", description: "", tags: "", github_url: "", live_url: "", cover_image: "", display_order: 0 };
 
-/* ───── Certificate form ───── */
 interface CertForm {
   name: string;
   issuer: string;
@@ -42,21 +40,19 @@ const AdminPanel = () => {
   const queryClient = useQueryClient();
   const [tab, setTab] = useState<Tab>("projects");
 
-  // Project state
   const [projectForm, setProjectForm] = useState<ProjectForm>(emptyProject);
   const [editingProjectId, setEditingProjectId] = useState<string | null>(null);
   const [showProjectForm, setShowProjectForm] = useState(false);
 
-  // Certificate state
   const [certForm, setCertForm] = useState<CertForm>(emptyCert);
   const [editingCertId, setEditingCertId] = useState<string | null>(null);
   const [showCertForm, setShowCertForm] = useState(false);
 
   useEffect(() => {
-    if (!authLoading && !adminLoading) {
-      if (!user || !isAdmin) navigate("/");
+    if (!authLoading && !adminLoading && !user) {
+      navigate("/auth");
     }
-  }, [user, authLoading, isAdmin, adminLoading, navigate]);
+  }, [user, authLoading, adminLoading, navigate]);
 
   /* ═══════ Queries ═══════ */
   const { data: projects = [], isLoading: loadingProjects } = useQuery({
@@ -66,7 +62,7 @@ const AdminPanel = () => {
       if (error) throw error;
       return data;
     },
-    enabled: !!user,
+    enabled: !!user && isAdmin,
   });
 
   const { data: blogs = [], isLoading: loadingBlogs } = useQuery({
@@ -76,7 +72,7 @@ const AdminPanel = () => {
       if (error) throw error;
       return data;
     },
-    enabled: !!user,
+    enabled: !!user && isAdmin,
   });
 
   const { data: certificates = [], isLoading: loadingCerts } = useQuery({
@@ -86,7 +82,7 @@ const AdminPanel = () => {
       if (error) throw error;
       return data;
     },
-    enabled: !!user,
+    enabled: !!user && isAdmin,
   });
 
   /* ═══════ Project mutations ═══════ */
@@ -117,14 +113,12 @@ const AdminPanel = () => {
     onError: (e: Error) => toast.error(e.message),
   });
 
-  /* ═══════ Blog mutations ═══════ */
   const deleteBlog = useMutation({
     mutationFn: async (id: string) => { const { error } = await supabase.from("blog_posts").delete().eq("id", id); if (error) throw error; },
     onSuccess: () => { queryClient.invalidateQueries({ queryKey: ["admin-blogs"] }); toast.success("Blog post deleted!"); },
     onError: (e: Error) => toast.error(e.message),
   });
 
-  /* ═══════ Certificate mutations ═══════ */
   const saveCert = useMutation({
     mutationFn: async (form: CertForm) => {
       const payload = { name: form.name, issuer: form.issuer, image_url: form.image_url || null, display_order: form.display_order, user_id: user!.id };
@@ -160,7 +154,27 @@ const AdminPanel = () => {
     setEditingCertId(c.id); setShowCertForm(true);
   };
 
-  if (authLoading || adminLoading || !user || !isAdmin) return null;
+  /* ═══════ Guard renders ═══════ */
+  if (authLoading || adminLoading) return null;
+
+  if (user && !isAdmin) {
+    return (
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
+        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="glass rounded-2xl p-12 max-w-md text-center space-y-4">
+          <div className="w-20 h-20 mx-auto rounded-full bg-destructive/10 flex items-center justify-center">
+            <span className="text-4xl">🚫</span>
+          </div>
+          <h1 className="text-3xl font-bold text-destructive">Unauthorized</h1>
+          <p className="text-muted-foreground text-lg">You do not have permission to access the admin panel. This area is restricted to authorized administrators only.</p>
+          <button onClick={() => navigate("/")} className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity">
+            <ArrowLeft size={16} /> Go Back Home
+          </button>
+        </motion.div>
+      </div>
+    );
+  }
+
+  if (!user) return null;
 
   const tabs: { key: Tab; label: string; icon: React.ReactNode }[] = [
     { key: "projects", label: "Projects", icon: <FolderKanban size={16} /> },
@@ -179,7 +193,6 @@ const AdminPanel = () => {
         </button>
         <h1 className="text-3xl font-bold mb-8">Admin Panel</h1>
 
-        {/* Tabs */}
         <div className="flex gap-1 mb-8 glass rounded-xl p-1.5 w-fit">
           {tabs.map(t => (
             <button key={t.key} onClick={() => { setTab(t.key); resetProjectForm(); resetCertForm(); }}
@@ -189,7 +202,6 @@ const AdminPanel = () => {
           ))}
         </div>
 
-        {/* ═══════ PROJECTS TAB ═══════ */}
         {tab === "projects" && (
           <div>
             <div className="flex items-center justify-between mb-6">
@@ -200,7 +212,6 @@ const AdminPanel = () => {
                 </button>
               )}
             </div>
-
             {showProjectForm && (
               <motion.form initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} onSubmit={e => { e.preventDefault(); saveProject.mutate(projectForm); }} className="glass rounded-xl p-6 mb-8 space-y-4">
                 <h3 className="text-lg font-semibold">{editingProjectId ? "Edit Project" : "New Project"}</h3>
@@ -223,7 +234,6 @@ const AdminPanel = () => {
                 </div>
               </motion.form>
             )}
-
             {loadingProjects ? <p className="text-muted-foreground">Loading...</p> : projects.length === 0 ? (
               <div className="glass rounded-xl p-12 text-center"><p className="text-muted-foreground">No projects yet.</p></div>
             ) : (
@@ -244,7 +254,6 @@ const AdminPanel = () => {
           </div>
         )}
 
-        {/* ═══════ BLOGS TAB ═══════ */}
         {tab === "blogs" && (
           <div>
             <div className="flex items-center justify-between mb-6">
@@ -253,7 +262,6 @@ const AdminPanel = () => {
                 <Plus size={16} /> New Post
               </button>
             </div>
-
             {loadingBlogs ? <p className="text-muted-foreground">Loading...</p> : blogs.length === 0 ? (
               <div className="glass rounded-xl p-12 text-center"><p className="text-muted-foreground">No blog posts yet.</p></div>
             ) : (
@@ -280,7 +288,6 @@ const AdminPanel = () => {
           </div>
         )}
 
-        {/* ═══════ CERTIFICATES TAB ═══════ */}
         {tab === "certificates" && (
           <div>
             <div className="flex items-center justify-between mb-6">
@@ -291,7 +298,6 @@ const AdminPanel = () => {
                 </button>
               )}
             </div>
-
             {showCertForm && (
               <motion.form initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} onSubmit={e => { e.preventDefault(); saveCert.mutate(certForm); }} className="glass rounded-xl p-6 mb-8 space-y-4">
                 <h3 className="text-lg font-semibold">{editingCertId ? "Edit Certificate" : "New Certificate"}</h3>
@@ -309,7 +315,6 @@ const AdminPanel = () => {
                 </div>
               </motion.form>
             )}
-
             {loadingCerts ? <p className="text-muted-foreground">Loading...</p> : certificates.length === 0 ? (
               <div className="glass rounded-xl p-12 text-center"><p className="text-muted-foreground">No certificates yet.</p></div>
             ) : (
