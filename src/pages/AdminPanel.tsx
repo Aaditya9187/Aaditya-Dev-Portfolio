@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useAdmin } from "@/hooks/useAdmin";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
 import { toast } from "sonner";
@@ -36,6 +37,7 @@ const emptyCert: CertForm = { name: "", issuer: "", image_url: "", display_order
 
 const AdminPanel = () => {
   const { user, loading: authLoading } = useAuth();
+  const { isAdmin, loading: adminLoading } = useAdmin();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [tab, setTab] = useState<Tab>("projects");
@@ -51,8 +53,10 @@ const AdminPanel = () => {
   const [showCertForm, setShowCertForm] = useState(false);
 
   useEffect(() => {
-    if (!authLoading && !user) navigate("/auth");
-  }, [user, authLoading, navigate]);
+    if (!authLoading && !adminLoading) {
+      if (!user || !isAdmin) navigate("/");
+    }
+  }, [user, authLoading, isAdmin, adminLoading, navigate]);
 
   /* ═══════ Queries ═══════ */
   const { data: projects = [], isLoading: loadingProjects } = useQuery({
@@ -156,7 +160,7 @@ const AdminPanel = () => {
     setEditingCertId(c.id); setShowCertForm(true);
   };
 
-  if (authLoading || !user) return null;
+  if (authLoading || adminLoading || !user || !isAdmin) return null;
 
   const tabs: { key: Tab; label: string; icon: React.ReactNode }[] = [
     { key: "projects", label: "Projects", icon: <FolderKanban size={16} /> },
