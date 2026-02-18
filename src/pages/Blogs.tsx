@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calendar, Clock, ArrowRight, Plus, LogIn } from "lucide-react";
+import { Calendar, Clock, ArrowRight, Plus } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { useAuth } from "@/hooks/useAuth";
+import { useAdmin } from "@/hooks/useAdmin";
 import { Badge } from "@/components/ui/badge";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -12,7 +12,7 @@ import type { BlogPost } from "@/types/blog";
 const Blogs = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
-  const { user } = useAuth();
+  const { isAdmin } = useAdmin();
 
   useEffect(() => {
     fetchPosts();
@@ -55,23 +55,16 @@ const Blogs = () => {
                 Technical articles, tutorials, and case studies.
               </p>
             </div>
-            <div className="flex gap-3">
-              {user ? (
+            {isAdmin && (
+              <div className="flex gap-3">
                 <Link
                   to="/blog/new"
                   className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity text-sm"
                 >
                   <Plus size={16} /> New Post
                 </Link>
-              ) : (
-                <Link
-                  to="/auth"
-                  className="inline-flex items-center gap-2 border border-border text-muted-foreground px-4 py-2 rounded-lg font-medium hover:border-primary hover:text-primary transition-colors text-sm"
-                >
-                  <LogIn size={16} /> Sign In
-                </Link>
-              )}
-            </div>
+              </div>
+            )}
           </motion.div>
 
           {loading ? (
