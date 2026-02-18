@@ -29,9 +29,10 @@ const emptyProject: ProjectForm = { title: "", description: "", tags: "", github
 interface CertForm {
   name: string;
   issuer: string;
+  image_url: string;
   display_order: number;
 }
-const emptyCert: CertForm = { name: "", issuer: "", display_order: 0 };
+const emptyCert: CertForm = { name: "", issuer: "", image_url: "", display_order: 0 };
 
 const AdminPanel = () => {
   const { user, loading: authLoading } = useAuth();
@@ -122,7 +123,7 @@ const AdminPanel = () => {
   /* ═══════ Certificate mutations ═══════ */
   const saveCert = useMutation({
     mutationFn: async (form: CertForm) => {
-      const payload = { name: form.name, issuer: form.issuer, display_order: form.display_order, user_id: user!.id };
+      const payload = { name: form.name, issuer: form.issuer, image_url: form.image_url || null, display_order: form.display_order, user_id: user!.id };
       if (editingCertId) {
         const { error } = await supabase.from("certificates").update(payload).eq("id", editingCertId);
         if (error) throw error;
@@ -151,7 +152,7 @@ const AdminPanel = () => {
   };
 
   const startEditCert = (c: any) => {
-    setCertForm({ name: c.name, issuer: c.issuer, display_order: c.display_order || 0 });
+    setCertForm({ name: c.name, issuer: c.issuer, image_url: c.image_url || "", display_order: c.display_order || 0 });
     setEditingCertId(c.id); setShowCertForm(true);
   };
 
@@ -294,9 +295,9 @@ const AdminPanel = () => {
                   <div><label className="block text-sm font-medium text-muted-foreground mb-1">Name *</label><input type="text" value={certForm.name} onChange={e => setCertForm({ ...certForm, name: e.target.value })} required className={inputClass} placeholder="Certificate name" /></div>
                   <div><label className="block text-sm font-medium text-muted-foreground mb-1">Issuer *</label><input type="text" value={certForm.issuer} onChange={e => setCertForm({ ...certForm, issuer: e.target.value })} required className={inputClass} placeholder="Issuing organization" /></div>
                 </div>
-                <div className="w-1/2">
-                  <label className="block text-sm font-medium text-muted-foreground mb-1">Display Order</label>
-                  <input type="number" value={certForm.display_order} onChange={e => setCertForm({ ...certForm, display_order: parseInt(e.target.value) || 0 })} className={inputClass} />
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div><label className="block text-sm font-medium text-muted-foreground mb-1">Image URL</label><input type="url" value={certForm.image_url} onChange={e => setCertForm({ ...certForm, image_url: e.target.value })} className={inputClass} placeholder="https://example.com/cert.png" /></div>
+                  <div><label className="block text-sm font-medium text-muted-foreground mb-1">Display Order</label><input type="number" value={certForm.display_order} onChange={e => setCertForm({ ...certForm, display_order: parseInt(e.target.value) || 0 })} className={inputClass} /></div>
                 </div>
                 <div className="flex gap-3 pt-2">
                   <button type="submit" disabled={saveCert.isPending} className="bg-primary text-primary-foreground px-6 py-2.5 rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50">{saveCert.isPending ? "Saving..." : editingCertId ? "Update" : "Add Certificate"}</button>
@@ -311,7 +312,7 @@ const AdminPanel = () => {
               <div className="space-y-3">
                 {certificates.map(c => (
                   <motion.div key={c.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="glass rounded-xl p-4 flex items-center gap-4">
-                    <Award size={18} className="text-primary shrink-0" />
+                    {c.image_url ? <img src={c.image_url} alt={c.name} className="w-10 h-10 object-contain rounded shrink-0" /> : <Award size={18} className="text-primary shrink-0" />}
                     <div className="flex-1 min-w-0"><h3 className="font-semibold truncate">{c.name}</h3><p className="text-sm text-muted-foreground">{c.issuer}</p></div>
                     <div className="flex gap-2 shrink-0">
                       <button onClick={() => startEditCert(c)} className="p-2 rounded-lg hover:bg-secondary text-muted-foreground hover:text-primary transition-colors"><Pencil size={16} /></button>
