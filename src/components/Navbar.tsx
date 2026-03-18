@@ -1,28 +1,28 @@
 import { useState, useCallback } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, User, LogOut } from "lucide-react";
-import { useAuth } from "@/hooks/useAuth";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Menu, X } from "lucide-react";
 
 const links = [
   { label: "Home", href: "/" },
   { label: "About", href: "/#about" },
   { label: "Skills", href: "/#skills" },
   { label: "Projects", href: "/#projects" },
-  { label: "Blog", href: "/blogs" },
+  { label: "Blog", href: "https://github.com/Aaditya9187", external: true },
   { label: "Contact", href: "/#contact" },
 ];
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const { user, signOut } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
-  const isBlogSection = location.pathname.startsWith("/blog") || location.pathname === "/blogs" || location.pathname === "/auth";
 
-  const handleNavClick = useCallback((href: string) => {
+  const handleNavClick = useCallback((href: string, external?: boolean) => {
     setOpen(false);
+    if (external) {
+      window.open(href, "_blank", "noopener,noreferrer");
+      return;
+    }
     if (href.includes("#")) {
       const hash = href.split("#")[1];
       if (location.pathname === "/") {
@@ -47,7 +47,7 @@ const Navbar = () => {
           {links.map((l) => (
             <li key={l.href}>
               <button
-                onClick={() => handleNavClick(l.href)}
+                onClick={() => handleNavClick(l.href, l.external)}
                 className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
               >
                 {l.label}
@@ -62,22 +62,6 @@ const Navbar = () => {
               Hire Me
             </button>
           </li>
-          {isBlogSection && user && (
-            <li className="flex items-center gap-2">
-              <Avatar className="h-8 w-8 border border-border">
-                <AvatarFallback className="bg-primary/10 text-primary text-xs">
-                  {user.email?.charAt(0).toUpperCase() || <User size={14} />}
-                </AvatarFallback>
-              </Avatar>
-              <button
-                onClick={signOut}
-                className="text-muted-foreground hover:text-primary transition-colors"
-                aria-label="Sign out"
-              >
-                <LogOut size={16} />
-              </button>
-            </li>
-          )}
         </ul>
 
         {/* Mobile toggle */}
@@ -103,7 +87,7 @@ const Navbar = () => {
               {links.map((l) => (
                 <li key={l.href}>
                   <button
-                    onClick={() => handleNavClick(l.href)}
+                    onClick={() => handleNavClick(l.href, l.external)}
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     {l.label}
@@ -118,23 +102,6 @@ const Navbar = () => {
                   Hire Me
                 </button>
               </li>
-              {isBlogSection && user && (
-                <li className="flex items-center gap-3 pt-2 border-t border-border">
-                  <Avatar className="h-8 w-8 border border-border">
-                    <AvatarFallback className="bg-primary/10 text-primary text-xs">
-                      {user.email?.charAt(0).toUpperCase() || <User size={14} />}
-                    </AvatarFallback>
-                  </Avatar>
-                  <span className="text-sm text-muted-foreground truncate">{user.email}</span>
-                  <button
-                    onClick={() => { signOut(); setOpen(false); }}
-                    className="ml-auto text-muted-foreground hover:text-primary transition-colors"
-                    aria-label="Sign out"
-                  >
-                    <LogOut size={16} />
-                  </button>
-                </li>
-              )}
             </ul>
           </motion.div>
         )}
