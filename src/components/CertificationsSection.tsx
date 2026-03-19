@@ -37,16 +37,23 @@ const CertificationsSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="glass rounded-xl p-5 flex items-start gap-4 hover-lift"
+              className="glass rounded-xl overflow-hidden hover-lift"
             >
               <img
-                src={cert.logo}
-                alt={cert.issuer}
-                className="w-10 h-10 object-contain rounded shrink-0 mt-0.5"
+                src={certificateImg}
+                alt={`${cert.name} certificate`}
+                className="w-full h-32 object-cover"
               />
-              <div>
-                <h3 className="font-semibold text-sm">{cert.name}</h3>
-                <p className="text-xs text-muted-foreground mt-1">{cert.issuer}</p>
+              <div className="p-4 flex items-start gap-3">
+                <img
+                  src={cert.logo}
+                  alt={cert.issuer}
+                  className="w-8 h-8 object-contain rounded shrink-0 mt-0.5"
+                />
+                <div>
+                  <h3 className="font-semibold text-sm">{cert.name}</h3>
+                  <p className="text-xs text-muted-foreground mt-1">{cert.issuer}</p>
+                </div>
               </div>
             </motion.div>
           ))}
