@@ -1,9 +1,15 @@
-import { motion } from "framer-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ExternalLink, Github, ChevronDown, ChevronUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { projects } from "@/data/projects";
 
+const INITIAL_COUNT = 4;
+
 const ProjectsSection = () => {
+  const [showAll, setShowAll] = useState(false);
+  const visible = showAll ? projects : projects.slice(0, INITIAL_COUNT);
+  const hasMore = projects.length > INITIAL_COUNT;
   return (
     <section id="projects" className="section-padding">
       <div className="max-w-7xl mx-auto">
