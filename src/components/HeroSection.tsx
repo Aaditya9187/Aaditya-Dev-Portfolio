@@ -102,7 +102,7 @@ const HeroSection = () => {
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               className="absolute -bottom-4 -right-4 glass-strong rounded-xl px-4 py-2 text-sm font-mono shadow-lg"
             >
-              <span className="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse mr-2" />
+              <span className="inline-block w-2 h-2 rounded-full bg-primary animate-pulse mr-2" />
               Available for work
             </motion.div>
           </div>
