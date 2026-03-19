@@ -3,6 +3,7 @@ import logoFreecodecamp from "@/assets/logo-freecodecamp.png";
 import logoGoogle from "@/assets/logo-google.png";
 import logoCoursera from "@/assets/logo-coursera.png";
 import logoMeta from "@/assets/logo-meta.png";
+import certificateImg from "@/assets/certificate-dummy.png";
 
 const certs = [
   { name: "Responsive Web Design", issuer: "freeCodeCamp", logo: logoFreecodecamp },
