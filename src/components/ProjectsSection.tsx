@@ -4,7 +4,7 @@ import { ExternalLink, Github, ChevronDown, ChevronUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { projects } from "@/data/projects";
 
-const INITIAL_COUNT = 4;
+const INITIAL_COUNT = 2;
 
 const ProjectsSection = () => {
   const [showAll, setShowAll] = useState(false);
