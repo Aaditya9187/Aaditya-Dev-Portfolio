@@ -13,16 +13,18 @@ const certs = [
   { name: "Frontend Development", issuer: "Meta", logo: logoMeta },
 ];
 
+const ease = [0.16, 1, 0.3, 1];
+
 const CertificationsSection = () => {
   return (
     <section className="section-padding relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-card/60 via-transparent to-card/60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-card/40 via-transparent to-card/40" />
       <div className="max-w-7xl mx-auto relative">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease }}
         >
           <p className="font-mono text-primary text-sm mb-2">// Certifications</p>
           <h2 className="text-3xl md:text-4xl font-bold mb-16">
@@ -34,27 +36,23 @@ const CertificationsSection = () => {
           {certs.map((cert, i) => (
             <motion.div
               key={cert.name}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="glass rounded-2xl overflow-hidden hover-lift group"
+              initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: i * 0.07, ease }}
+              className="glass rounded-2xl overflow-hidden hover-lift card-shine group"
             >
               <div className="relative">
                 <img
                   src={certificateImg}
                   alt={`${cert.name} certificate`}
-                  className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-32 object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
               </div>
-              <div className="p-4 flex items-start gap-3">
-                <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center shrink-0">
-                  <img
-                    src={cert.logo}
-                    alt={cert.issuer}
-                    className="w-6 h-6 object-contain"
-                  />
+              <div className="p-5 flex items-start gap-3">
+                <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center shrink-0 group-hover:bg-primary/10 transition-colors duration-300">
+                  <img src={cert.logo} alt={cert.issuer} className="w-6 h-6 object-contain" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-sm">{cert.name}</h3>

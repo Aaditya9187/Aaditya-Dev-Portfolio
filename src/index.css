@@ -6,48 +6,48 @@
 
 @layer base {
   :root {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 95%;
+    --background: 228 12% 4%;
+    --foreground: 45 10% 93%;
 
-    --card: 240 6% 8%;
-    --card-foreground: 0 0% 95%;
+    --card: 228 10% 7%;
+    --card-foreground: 45 10% 93%;
 
-    --popover: 240 6% 8%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 228 10% 7%;
+    --popover-foreground: 45 10% 93%;
 
-    --primary: 38 92% 50%;
-    --primary-foreground: 240 10% 3.9%;
+    --primary: 40 95% 54%;
+    --primary-foreground: 228 12% 4%;
 
-    --secondary: 240 4% 16%;
-    --secondary-foreground: 0 0% 80%;
+    --secondary: 228 8% 14%;
+    --secondary-foreground: 45 6% 72%;
 
-    --muted: 240 4% 16%;
-    --muted-foreground: 240 5% 55%;
+    --muted: 228 8% 14%;
+    --muted-foreground: 228 8% 50%;
 
-    --accent: 38 92% 50%;
-    --accent-foreground: 240 10% 3.9%;
+    --accent: 40 95% 54%;
+    --accent-foreground: 228 12% 4%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 95%;
 
-    --border: 240 4% 16%;
-    --input: 240 4% 16%;
-    --ring: 38 92% 50%;
+    --border: 228 8% 14%;
+    --input: 228 8% 14%;
+    --ring: 40 95% 54%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 240 6% 6%;
-    --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 38 92% 50%;
-    --sidebar-primary-foreground: 240 10% 3.9%;
-    --sidebar-accent: 240 4% 12%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 240 4% 16%;
-    --sidebar-ring: 38 92% 50%;
+    --sidebar-background: 228 10% 5%;
+    --sidebar-foreground: 45 10% 93%;
+    --sidebar-primary: 40 95% 54%;
+    --sidebar-primary-foreground: 228 12% 4%;
+    --sidebar-accent: 228 8% 11%;
+    --sidebar-accent-foreground: 45 10% 93%;
+    --sidebar-border: 228 8% 14%;
+    --sidebar-ring: 40 95% 54%;
 
-    --gold-glow: 38 100% 60%;
-    --surface-elevated: 240 6% 10%;
-    --surface-glass: 240 6% 8% / 0.6;
+    --gold-glow: 32 100% 62%;
+    --surface-elevated: 228 10% 9%;
+    --surface-glass: 228 10% 7% / 0.6;
   }
 }
 
@@ -69,7 +69,7 @@
   }
 
   ::selection {
-    background: hsl(var(--primary) / 0.3);
+    background: hsl(var(--primary) / 0.25);
     color: hsl(var(--foreground));
   }
 }
@@ -80,31 +80,54 @@
   }
 
   .glow-primary {
-    box-shadow: 0 0 40px -10px hsl(var(--primary) / 0.4);
+    box-shadow: 0 0 30px -8px hsl(var(--primary) / 0.35), 0 0 8px -2px hsl(var(--primary) / 0.2);
   }
 
   .glow-primary-lg {
-    box-shadow: 0 0 60px -10px hsl(var(--primary) / 0.3), 0 0 120px -20px hsl(var(--primary) / 0.15);
+    box-shadow: 0 0 60px -10px hsl(var(--primary) / 0.25), 0 0 120px -20px hsl(var(--primary) / 0.1);
   }
 
   .glass {
-    @apply bg-card/60 backdrop-blur-xl border border-border/50;
+    @apply bg-card/50 backdrop-blur-xl border border-border/40;
   }
 
   .glass-strong {
-    @apply bg-card/80 backdrop-blur-2xl border border-border/60;
+    @apply bg-card/75 backdrop-blur-2xl border border-border/50;
   }
 
   .section-padding {
-    @apply py-24 md:py-36 px-6 md:px-12 lg:px-20;
+    @apply py-28 md:py-40 px-6 md:px-12 lg:px-20;
   }
 
   .hover-lift {
-    @apply transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-primary/5;
+    @apply transition-all duration-500 hover:-translate-y-2;
+    &:hover {
+      box-shadow: 0 20px 40px -12px hsl(var(--primary) / 0.08), 0 8px 16px -8px hsl(228 12% 0% / 0.4);
+    }
   }
 
   .divider-gradient {
-    @apply h-px bg-gradient-to-r from-transparent via-border to-transparent;
+    @apply h-px bg-gradient-to-r from-transparent via-border/80 to-transparent;
+  }
+
+  .card-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .card-shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary) / 0.04), transparent);
+    transition: left 0.7s ease;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .card-shine:hover::before {
+    left: 100%;
   }
 
   .noise-bg {
@@ -114,7 +137,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    opacity: 0.03;
+    opacity: 0.02;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 0;

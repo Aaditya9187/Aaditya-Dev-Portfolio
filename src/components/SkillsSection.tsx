@@ -36,18 +36,19 @@ const skillGroups = [
   },
 ];
 
+const ease = [0.16, 1, 0.3, 1];
+
 const SkillsSection = () => {
   return (
     <section id="skills" className="section-padding relative overflow-hidden">
-      {/* Background accent */}
-      <div className="absolute inset-0 bg-gradient-to-b from-card/60 via-transparent to-card/60" />
+      <div className="absolute inset-0 bg-gradient-to-b from-card/40 via-transparent to-card/40" />
 
       <div className="max-w-7xl mx-auto relative">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease }}
         >
           <p className="font-mono text-primary text-sm mb-2">// Skills & Tech</p>
           <h2 className="text-3xl md:text-4xl font-bold mb-16">
@@ -55,33 +56,33 @@ const SkillsSection = () => {
           </h2>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-5">
           {skillGroups.map((group, gi) => (
             <motion.div
               key={group.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: gi * 0.15 }}
-              className="glass rounded-2xl p-6 hover-lift"
+              initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: gi * 0.1, ease }}
+              className="glass rounded-2xl p-7 hover-lift"
             >
               <div className="flex items-center gap-3 mb-6">
                 <span className="text-2xl">{group.emoji}</span>
                 <h3 className="font-semibold text-lg">{group.title}</h3>
               </div>
-              <div className="space-y-4">
-                {group.skills.map((skill) => (
+              <div className="space-y-5">
+                {group.skills.map((skill, si) => (
                   <div key={skill.name}>
                     <div className="flex justify-between text-sm mb-2">
                       <span className="font-mono text-foreground/90">{skill.name}</span>
-                      <span className="text-muted-foreground text-xs font-mono">{skill.level}%</span>
+                      <span className="text-muted-foreground text-xs font-mono tabular-nums">{skill.level}%</span>
                     </div>
                     <div className="h-1.5 bg-secondary rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
                         whileInView={{ width: `${skill.level}%` }}
                         viewport={{ once: true }}
-                        transition={{ duration: 1.2, delay: 0.2, ease: "easeOut" }}
+                        transition={{ duration: 1, delay: 0.15 + si * 0.05, ease: [0.16, 1, 0.3, 1] }}
                         className="h-full rounded-full bg-gradient-to-r from-primary to-[hsl(var(--gold-glow))]"
                       />
                     </div>
