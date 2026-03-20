@@ -2,13 +2,13 @@ import { useState, useCallback, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import pixelAvatar from "@/assets/avatar-pixel.png";
 
 const links = [
   { label: "Home", href: "/" },
   { label: "About", href: "/#about" },
-  { label: "Skills", href: "/#skills" },
+  { label: "Services", href: "/#services" },
   { label: "Projects", href: "/#projects" },
-  { label: "Blog", href: "https://github.com/Aaditya9187", external: true },
   { label: "Contact", href: "/#contact" },
 ];
 
@@ -43,10 +43,11 @@ const Navbar = () => {
   }, [location.pathname, navigate]);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'glass-strong shadow-lg shadow-background/50' : 'bg-transparent'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass-strong shadow-lg shadow-background/40' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-        <Link to="/" className="text-xl font-bold font-mono text-gradient">
-          &lt;Aaditya /&gt;
+        <Link to="/" className="flex items-center gap-2.5">
+          <img src={pixelAvatar} alt="Aaditya" className="w-8 h-8 rounded-lg ring-1 ring-border/40" />
+          <span className="text-lg font-bold font-mono text-gradient">&lt;Aaditya /&gt;</span>
         </Link>
 
         {/* Desktop */}
@@ -54,8 +55,8 @@ const Navbar = () => {
           {links.map((l) => (
             <li key={l.href}>
               <button
-                onClick={() => handleNavClick(l.href, l.external)}
-                className="text-sm text-muted-foreground hover:text-foreground px-3 py-2 rounded-lg hover:bg-secondary/50 transition-all duration-200"
+                onClick={() => handleNavClick(l.href)}
+                className="text-sm text-muted-foreground hover:text-foreground px-3 py-2 rounded-lg hover:bg-secondary/40 transition-all duration-200"
               >
                 {l.label}
               </button>
@@ -64,7 +65,7 @@ const Navbar = () => {
           <li className="ml-2">
             <button
               onClick={() => handleNavClick("/#contact")}
-              className="text-sm bg-primary text-primary-foreground px-5 py-2 rounded-lg font-medium hover:opacity-90 transition-opacity glow-primary"
+              className="text-sm bg-primary text-primary-foreground px-5 py-2 rounded-lg font-medium transition-all duration-200 glow-primary active:scale-[0.97]"
             >
               Hire Me
             </button>
@@ -73,7 +74,7 @@ const Navbar = () => {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden text-foreground p-2 rounded-lg hover:bg-secondary/50 transition-colors"
+          className="md:hidden text-foreground p-2 rounded-lg hover:bg-secondary/40 transition-colors duration-200"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -88,14 +89,15 @@ const Navbar = () => {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="md:hidden overflow-hidden glass-strong"
           >
             <ul className="flex flex-col gap-1 px-6 py-4">
               {links.map((l) => (
                 <li key={l.href}>
                   <button
-                    onClick={() => handleNavClick(l.href, l.external)}
-                    className="w-full text-left text-muted-foreground hover:text-foreground px-3 py-2.5 rounded-lg hover:bg-secondary/50 transition-all"
+                    onClick={() => handleNavClick(l.href)}
+                    className="w-full text-left text-muted-foreground hover:text-foreground px-3 py-2.5 rounded-lg hover:bg-secondary/40 transition-all duration-200"
                   >
                     {l.label}
                   </button>
@@ -104,7 +106,7 @@ const Navbar = () => {
               <li className="mt-2">
                 <button
                   onClick={() => handleNavClick("/#contact")}
-                  className="w-full bg-primary text-primary-foreground px-4 py-2.5 rounded-lg font-medium text-center"
+                  className="w-full bg-primary text-primary-foreground px-4 py-2.5 rounded-lg font-medium text-center active:scale-[0.97] transition-transform"
                 >
                   Hire Me
                 </button>

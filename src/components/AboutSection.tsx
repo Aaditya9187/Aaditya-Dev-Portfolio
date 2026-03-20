@@ -9,16 +9,18 @@ const highlights = [
   { icon: Gamepad2, label: "Cricket & Gaming", desc: "Balancing work with passion" },
 ];
 
+const ease = [0.16, 1, 0.3, 1];
+
 const AboutSection = () => {
   return (
     <section id="about" className="section-padding relative">
       <div className="divider-gradient absolute top-0 left-6 right-6" />
       <div className="max-w-7xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+          whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease }}
         >
           <p className="font-mono text-primary text-sm mb-2">// About Me</p>
           <h2 className="text-3xl md:text-4xl font-bold mb-16">
@@ -29,14 +31,14 @@ const AboutSection = () => {
         <div className="grid md:grid-cols-5 gap-12 items-center mb-20">
           {/* Image */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            initial={{ opacity: 0, x: -20, filter: "blur(4px)" }}
+            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, ease }}
             className="md:col-span-2 flex justify-center"
           >
             <div className="relative">
-              <div className="w-56 h-56 md:w-72 md:h-72 rounded-2xl overflow-hidden ring-2 ring-primary/20">
+              <div className="w-56 h-56 md:w-72 md:h-72 rounded-2xl overflow-hidden ring-1 ring-border/40">
                 <img
                   src={avatarImg}
                   alt="Aaditya"
@@ -44,16 +46,16 @@ const AboutSection = () => {
                   loading="lazy"
                 />
               </div>
-              <div className="absolute -z-10 inset-0 rounded-2xl bg-gradient-to-br from-primary/20 to-transparent translate-x-3 translate-y-3 blur-sm" />
+              <div className="absolute -z-10 inset-0 rounded-2xl bg-gradient-to-br from-primary/15 to-transparent translate-x-3 translate-y-3 blur-lg" />
             </div>
           </motion.div>
 
           {/* Text */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            initial={{ opacity: 0, x: 20, filter: "blur(4px)" }}
+            whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.15, ease }}
             className="md:col-span-3"
           >
             <p className="text-muted-foreground text-lg leading-relaxed mb-6">
@@ -72,14 +74,13 @@ const AboutSection = () => {
           {highlights.map((item, i) => (
             <motion.div
               key={item.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="glass rounded-xl p-6 hover-lift group relative overflow-hidden"
+              initial={{ opacity: 0, y: 16, filter: "blur(4px)" }}
+              whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.5, delay: i * 0.08, ease }}
+              className="glass rounded-xl p-6 hover-lift card-shine group relative overflow-hidden"
             >
-              <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full -translate-y-8 translate-x-8 group-hover:bg-primary/10 transition-colors" />
-              <item.icon className="text-primary mb-4 group-hover:scale-110 transition-transform relative z-10" size={28} />
+              <item.icon className="text-muted-foreground mb-4 group-hover:text-primary group-hover:scale-110 transition-all duration-300 relative z-10" size={26} />
               <h3 className="font-semibold mb-1 relative z-10">{item.label}</h3>
               <p className="text-sm text-muted-foreground relative z-10">{item.desc}</p>
             </motion.div>
