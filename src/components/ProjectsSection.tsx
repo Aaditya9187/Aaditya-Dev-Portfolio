@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, Github, ChevronDown, ChevronUp, ArrowUpRight } from "lucide-react";
+import { ExternalLink, Github, ChevronDown, ChevronUp, ArrowUpRight, Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 import { projects } from "@/data/projects";
 
@@ -43,17 +43,25 @@ const ProjectsSection = () => {
               >
                 <Link
                   to={`/project/${project.id}`}
-                  className="glass rounded-2xl overflow-hidden hover-lift card-shine group block cursor-pointer"
+                  className="glass rounded-2xl overflow-hidden hover-lift card-shine border-glow group block cursor-pointer"
                 >
                   {project.cover_image && (
                     <div className="relative overflow-hidden">
                       <img
                         src={project.cover_image}
                         alt={project.title}
-                        className="w-full h-52 object-cover group-hover:scale-[1.03] transition-transform duration-700 ease-out"
+                        className="w-full h-52 object-cover group-hover:scale-[1.05] transition-transform duration-700 ease-out"
                         loading="lazy"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
+                      
+                      {/* Hover overlay with icon */}
+                      <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div className="glass-strong rounded-full p-3 opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-500">
+                          <Eye size={20} className="text-primary" />
+                        </div>
+                      </div>
+                      
                       <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <span className="inline-flex items-center gap-1 glass-strong rounded-full px-3 py-1 text-xs font-mono text-primary">
                           View <ArrowUpRight size={12} />
@@ -94,7 +102,7 @@ const ProjectsSection = () => {
                       {project.tags.map((tool) => (
                         <span
                           key={tool}
-                          className="text-xs font-mono bg-secondary/80 text-secondary-foreground px-3 py-1 rounded-full"
+                          className="text-xs font-mono bg-secondary/80 text-secondary-foreground px-3 py-1 rounded-full border border-border/20 hover:border-primary/30 transition-colors duration-200"
                         >
                           {tool}
                         </span>
@@ -117,7 +125,7 @@ const ProjectsSection = () => {
           >
             <button
               onClick={() => setShowAll(!showAll)}
-              className="group inline-flex items-center gap-2 px-7 py-3 rounded-xl glass text-sm font-medium text-muted-foreground hover:text-primary hover:border-primary/30 transition-all duration-300 active:scale-[0.97]"
+              className="group inline-flex items-center gap-2 px-7 py-3 rounded-xl glass text-sm font-medium text-muted-foreground hover:text-primary hover:border-primary/30 transition-all duration-300 active:scale-[0.97] border-glow"
             >
               {showAll ? (
                 <>Show less <ChevronUp size={16} className="group-hover:-translate-y-0.5 transition-transform duration-200" /></>
