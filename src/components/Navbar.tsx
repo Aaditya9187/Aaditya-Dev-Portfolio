@@ -1,8 +1,9 @@
 import { useState, useCallback, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import pixelAvatar from "@/assets/avatar-pixel.png";
+import { useTheme } from "@/hooks/use-theme";
 
 const links = [
   { label: "Home", href: "/" },
@@ -17,6 +18,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -62,7 +64,38 @@ const Navbar = () => {
               </button>
             </li>
           ))}
-          <li className="ml-2">
+          <li className="ml-1">
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              className="relative w-9 h-9 rounded-lg flex items-center justify-center hover:bg-secondary/40 transition-colors duration-200 overflow-hidden"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {theme === "dark" ? (
+                  <motion.div
+                    key="sun"
+                    initial={{ y: -20, opacity: 0, rotate: -90 }}
+                    animate={{ y: 0, opacity: 1, rotate: 0 }}
+                    exit={{ y: 20, opacity: 0, rotate: 90 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <Sun size={18} className="text-muted-foreground" />
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="moon"
+                    initial={{ y: -20, opacity: 0, rotate: 90 }}
+                    animate={{ y: 0, opacity: 1, rotate: 0 }}
+                    exit={{ y: 20, opacity: 0, rotate: -90 }}
+                    transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                  >
+                    <Moon size={18} className="text-muted-foreground" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </button>
+          </li>
+          <li className="ml-1">
             <button
               onClick={() => handleNavClick("/#contact")}
               className="text-sm bg-primary text-primary-foreground px-5 py-2 rounded-lg font-medium transition-all duration-200 glow-primary active:scale-[0.97]"
@@ -72,14 +105,45 @@ const Navbar = () => {
           </li>
         </ul>
 
-        {/* Mobile toggle */}
-        <button
-          className="md:hidden text-foreground p-2 rounded-lg hover:bg-secondary/40 transition-colors duration-200"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        {/* Mobile controls */}
+        <div className="flex md:hidden items-center gap-1">
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="relative w-9 h-9 rounded-lg flex items-center justify-center hover:bg-secondary/40 transition-colors duration-200 overflow-hidden"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {theme === "dark" ? (
+                <motion.div
+                  key="sun"
+                  initial={{ y: -20, opacity: 0, rotate: -90 }}
+                  animate={{ y: 0, opacity: 1, rotate: 0 }}
+                  exit={{ y: 20, opacity: 0, rotate: 90 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <Sun size={18} className="text-muted-foreground" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="moon"
+                  initial={{ y: -20, opacity: 0, rotate: 90 }}
+                  animate={{ y: 0, opacity: 1, rotate: 0 }}
+                  exit={{ y: 20, opacity: 0, rotate: -90 }}
+                  transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <Moon size={18} className="text-muted-foreground" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </button>
+          <button
+            className="text-foreground p-2 rounded-lg hover:bg-secondary/40 transition-colors duration-200"
+            onClick={() => setOpen(!open)}
+            aria-label="Toggle menu"
+          >
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
