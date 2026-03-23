@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Send, Sparkles } from "lucide-react";
+import { ArrowDown, Send, Sparkles, Download } from "lucide-react";
 import avatarImg from "@/assets/avatar.png";
 import pixelAvatar from "@/assets/avatar-pixel.png";
 import { useState } from "react";
@@ -108,6 +108,14 @@ const HeroSection = () => {
             >
               Let's Talk
               <Send size={16} className="group-hover:translate-x-0.5 transition-transform duration-200" />
+            </a>
+            <a
+              href="/resume.pdf"
+              download
+              className="group inline-flex items-center gap-2 glass text-foreground px-7 py-3.5 rounded-xl font-medium transition-all duration-300 hover:border-primary/40 active:scale-[0.97] border-glow"
+            >
+              Resume
+              <Download size={16} className="group-hover:translate-y-0.5 transition-transform duration-200" />
             </a>
           </motion.div>
 
