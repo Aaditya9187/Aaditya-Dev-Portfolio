@@ -5,7 +5,7 @@ const services = [
   {
     icon: Globe,
     title: "Web Development",
-    description: "High-performance React applications with clean architecture, fast load times, and scalable codebases.",
+    description: "High-performance full-stack web applications built with modern technologies, clean architecture, fast load times, and scalable codebases.",
     accent: "from-primary/10 to-transparent",
     number: "01",
   },

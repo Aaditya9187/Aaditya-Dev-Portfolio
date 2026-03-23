@@ -46,9 +46,12 @@ const TestimonialsSection = () => {
         >
           <div>
             <p className="font-mono text-primary text-sm mb-2">// Testimonials</p>
-            <h2 className="text-3xl md:text-4xl font-bold">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
               What clients <span className="text-gradient">say</span>
             </h2>
+            <p className="text-muted-foreground max-w-xl leading-relaxed">
+            Helping businesses and creators build modern digital experiences
+          </p>
           </div>
           <motion.div
             animate={{ y: [0, -4, 0] }}

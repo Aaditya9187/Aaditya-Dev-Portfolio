@@ -5,11 +5,11 @@ const skillGroups = [
     title: "Frontend",
     emoji: "🎨",
     skills: [
-      { name: "HTML & CSS", level: 95 },
-      { name: "JavaScript", level: 90 },
-      { name: "React", level: 85 },
-      { name: "Tailwind CSS", level: 90 },
-      { name: "TypeScript", level: 75 },
+      { name: "HTML & CSS", level: 90 },
+      { name: "JavaScript", level: 85 },
+      { name: "React", level: 80 },
+      { name: "Tailwind CSS", level: 87 },
+      { name: "TypeScript", level: 70 },
     ],
   },
   {
@@ -52,9 +52,12 @@ const SkillsSection = () => {
           transition={{ duration: 0.6, ease }}
         >
           <p className="font-mono text-primary text-sm mb-2">// Skills & Tech</p>
-          <h2 className="text-3xl md:text-4xl font-bold mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">
             My <span className="text-gradient">toolbox</span>
           </h2>
+          <p className="text-muted-foreground max-w-xl mb-16 leading-relaxed">
+            Technologies I use to build modern, scalable web applications.
+          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-5">

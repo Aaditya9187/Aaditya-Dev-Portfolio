@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Code2, Cpu, Trophy, Gamepad2 } from "lucide-react";
-import avatarImg from "@/assets/avatar.png";
+import avatarImg from "@/assets/avatar2.png";
 
 const highlights = [
   { icon: Code2, label: "Web Development", desc: "Building modern, responsive applications", color: "from-primary/20 to-primary/5" },
@@ -41,7 +41,7 @@ const AboutSection = () => {
               <div className="w-56 h-56 md:w-72 md:h-72 rounded-2xl overflow-hidden ring-1 ring-border/40 transition-transform duration-700 group-hover:scale-[1.02]">
                 <img
                   src={avatarImg}
-                  alt="Aaditya"
+                  alt="Aaditya Chhatraliya"
                   className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
                   loading="lazy"
                 />
@@ -64,9 +64,9 @@ const AboutSection = () => {
             className="md:col-span-3"
           >
             <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-              I'm a passionate web developer and designer with a knack for creating beautiful,
-              functional websites. With experience spanning frontend development, UI/UX design,
-              and IoT projects, I bring a unique blend of creativity and technical skill to every project.
+              I'm an experienced and reliable web developer and designer focused on creating modern,
+              high-performance websites. With experience in frontend development, UI/UX design, and IoT projects, 
+              I bring a strong blend of creativity and technical expertise to every project.
             </p>
             <p className="text-muted-foreground text-lg leading-relaxed mb-8">
               When I'm not coding, you'll find me on the cricket pitch or tinkering with robotic builds.

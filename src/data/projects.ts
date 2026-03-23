@@ -97,4 +97,44 @@ export const projects: Project[] = [
       "Cloud-synced to MongoDB Atlas",
     ],
   },
+  {
+    id: "task-management-app",
+    title: "Task Management App",
+    description:
+      "A full-stack Kanban-style task manager with drag-and-drop, user authentication, and cloud sync capabilities.",
+    longDescription:
+      "A productivity tool inspired by Trello and Notion. Users can create boards, add columns, and drag tasks between them with smooth animations powered by dnd-kit. Authentication is handled via JWT with refresh tokens stored in HTTP-only cookies. All data is persisted in MongoDB Atlas and synced in real time across tabs using change streams. The UI is fully responsive and supports keyboard navigation for accessibility.",
+    tags: ["React", "Node.js", "MongoDB", "Tailwind"],
+    cover_image: projectTaskmanager,
+    gallery: [projectTaskmanager],
+    github_url: "#",
+    live_url: "#",
+    features: [
+      "Drag-and-drop Kanban boards",
+      "JWT authentication with refresh tokens",
+      "Real-time sync across tabs",
+      "Keyboard-accessible UI",
+      "Cloud-synced to MongoDB Atlas",
+    ],
+  },
+  {
+    id: "task-management-app",
+    title: "Task Management App",
+    description:
+      "A full-stack Kanban-style task manager with drag-and-drop, user authentication, and cloud sync capabilities.",
+    longDescription:
+      "A productivity tool inspired by Trello and Notion. Users can create boards, add columns, and drag tasks between them with smooth animations powered by dnd-kit. Authentication is handled via JWT with refresh tokens stored in HTTP-only cookies. All data is persisted in MongoDB Atlas and synced in real time across tabs using change streams. The UI is fully responsive and supports keyboard navigation for accessibility.",
+    tags: ["React", "Node.js", "MongoDB", "Tailwind"],
+    cover_image: projectTaskmanager,
+    gallery: [projectTaskmanager],
+    github_url: "#",
+    live_url: "#",
+    features: [
+      "Drag-and-drop Kanban boards",
+      "JWT authentication with refresh tokens",
+      "Real-time sync across tabs",
+      "Keyboard-accessible UI",
+      "Cloud-synced to MongoDB Atlas",
+    ],
+  },
 ];

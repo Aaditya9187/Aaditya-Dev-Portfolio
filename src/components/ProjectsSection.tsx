@@ -4,7 +4,7 @@ import { ExternalLink, Github, ChevronDown, ChevronUp, ArrowUpRight, Eye } from 
 import { Link } from "react-router-dom";
 import { projects } from "@/data/projects";
 
-const INITIAL_COUNT = 2;
+const INITIAL_COUNT = 4;
 const ease = [0.16, 1, 0.3, 1];
 
 const ProjectsSection = () => {
@@ -50,7 +50,7 @@ const ProjectsSection = () => {
                       <img
                         src={project.cover_image}
                         alt={project.title}
-                        className="w-full h-52 object-cover group-hover:scale-[1.05] transition-transform duration-700 ease-out"
+                        className="w-full h-64 md:h-80 object-cover group-hover:scale-[1.05] transition-transform duration-700 ease-out"
                         loading="lazy"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-card via-card/30 to-transparent" />
@@ -128,7 +128,7 @@ const ProjectsSection = () => {
               className="group inline-flex items-center gap-2 px-7 py-3 rounded-xl glass text-sm font-medium text-muted-foreground hover:text-primary hover:border-primary/30 transition-all duration-300 active:scale-[0.97] border-glow"
             >
               {showAll ? (
-                <>Show less <ChevronUp size={16} className="group-hover:-translate-y-0.5 transition-transform duration-200" /></>
+                <>Show less projects <ChevronUp size={16} className="group-hover:-translate-y-0.5 transition-transform duration-200" /></>
               ) : (
                 <>Show more projects <ChevronDown size={16} className="group-hover:translate-y-0.5 transition-transform duration-200" /></>
               )}

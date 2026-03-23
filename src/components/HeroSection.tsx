@@ -8,8 +8,7 @@ import MagneticButton from "@/components/MagneticButton";
 const ease = [0.16, 1, 0.3, 1];
 
 const HeroSection = () => {
-  const [hovered, setHovered] = useState(false);
-
+  
   return (
     <section className="min-h-screen flex items-center section-padding pt-28 relative overflow-hidden">
       {/* Grid pattern background */}
@@ -95,7 +94,7 @@ const HeroSection = () => {
               <a
                 href="#projects"
                 onClick={(e) => { e.preventDefault(); document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" }); }}
-                className="group relative inline-flex items-center gap-2 bg-primary text-primary-foreground px-7 py-3.5 rounded-xl font-medium transition-all duration-300 animate-glow-pulse active:scale-[0.97] overflow-hidden"
+                className="group relative inline-flex items-center gap-2 bg-primary text-primary-foreground px-7 py-3.5 rounded-xl font-medium transition-all duration-2000 animate-glow-pulse active:scale-[0.97] overflow-hidden"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   View My Work 
@@ -160,35 +159,31 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.2, ease }}
           className="flex justify-center"
         >
-          <div
-            className="relative cursor-pointer"
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-          >
+          <div className="relative">
             {/* Rotating ring */}
             <div className="absolute -inset-4 rounded-[2rem] border border-primary/10 animate-rotate-slow" />
             <div className="absolute -inset-8 rounded-[2.5rem] border border-dashed border-primary/5 animate-rotate-slow" style={{ animationDirection: "reverse", animationDuration: "30s" }} />
 
             {/* Soft glow behind */}
             <motion.div 
-              animate={{ scale: hovered ? 1.3 : 1.25 }}
+              animate={{ scale: 1.25 }}
               transition={{ duration: 0.5 }}
               className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/20 via-primary/5 to-transparent blur-3xl"
             />
             
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-3xl overflow-hidden ring-1 ring-border/40 animate-float">
               <img
-                src={hovered ? pixelAvatar : avatarImg}
+                src={avatarImg}
                 alt="Aaditya – Web Developer & Designer"
                 className="w-full h-full object-cover transition-all duration-500"
-                style={{ imageRendering: hovered ? "pixelated" : "auto" }}
+               style={{ imageRendering: "auto" }}
               />
               {/* Bottom vignette */}
               <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-transparent to-transparent" />
               
               {/* Hover overlay */}
               <motion.div 
-                animate={{ opacity: hovered ? 0.1 : 0 }}
+                animate={{ opacity: 0 }}
                 className="absolute inset-0 bg-primary"
               />
             </div>
@@ -200,7 +195,7 @@ const HeroSection = () => {
               className="absolute -bottom-3 -right-3 glass-strong rounded-xl px-4 py-2.5 text-sm font-mono shadow-lg shadow-background/50 border-glow"
             >
               <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse" />
-              {hovered ? "Pixel mode!" : "Open to work"}
+              Open to work
             </motion.div>
           </div>
         </motion.div>
