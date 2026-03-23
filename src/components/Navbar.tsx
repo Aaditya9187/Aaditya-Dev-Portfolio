@@ -174,12 +174,15 @@ const Navbar = () => {
                 </li>
               ))}
               <li className="mt-2">
-                <button
-                  onClick={() => handleNavClick("/#contact")}
-                  className="w-full bg-primary text-primary-foreground px-4 py-2.5 rounded-lg font-medium text-center active:scale-[0.97] transition-transform"
+                <a
+                  href="https://calendly.com/your-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-1.5 bg-primary text-primary-foreground px-4 py-2.5 rounded-lg font-medium text-center active:scale-[0.97] transition-transform"
                 >
-                  Hire Me
-                </button>
+                  <Calendar size={14} />
+                  Schedule a Call
+                </a>
               </li>
             </ul>
           </motion.div>
