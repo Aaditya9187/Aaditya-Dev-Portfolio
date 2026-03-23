@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Send, Sparkles, Download } from "lucide-react";
+import { ArrowDown, Send, Sparkles, Download, Calendar } from "lucide-react";
 import avatarImg from "@/assets/avatar.png";
 import pixelAvatar from "@/assets/avatar-pixel.png";
 import { useState } from "react";
+import MagneticButton from "@/components/MagneticButton";
 
 const ease = [0.16, 1, 0.3, 1];
 
