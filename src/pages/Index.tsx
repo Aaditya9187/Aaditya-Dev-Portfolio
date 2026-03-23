@@ -34,9 +34,8 @@ const Index = () => {
       <ProjectsSection />
       <CertificationsSection />
       <TestimonialsSection />
-      <NewsletterSection />
       <ContactSection />
-      <Footer />
+      <NewsletterSection />
       <Footer />
     </div>
   );
