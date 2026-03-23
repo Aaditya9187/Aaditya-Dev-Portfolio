@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Send, Sparkles } from "lucide-react";
+import { ArrowDown, Send, Sparkles, Download } from "lucide-react";
 import avatarImg from "@/assets/avatar.png";
 import pixelAvatar from "@/assets/avatar-pixel.png";
 import { useState } from "react";
