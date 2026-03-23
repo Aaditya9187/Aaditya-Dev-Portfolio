@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { toast } from "sonner";
 import { Mail, Linkedin, Github, Send, ArrowUpRight, Sparkles } from "lucide-react";
 
 const socials = [
@@ -20,6 +21,10 @@ const ContactSection = () => {
     const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`);
     window.location.href = `mailto:aaditya@example.com?subject=${subject}&body=${body}`;
     setForm({ name: "", email: "", message: "" });
+    toast.success("Message ready to send! 🚀", {
+      description: "Your email client should open shortly.",
+      duration: 4000,
+    });
   };
 
   const inputClass = (field: string) =>

@@ -26,12 +26,17 @@ const NewsletterSection = () => {
 
       if (error) {
         if (error.code === "23505") {
-          toast.info("You're already subscribed!");
+          toast.info("You're already on the list! 😊", {
+            description: "We'll keep sending you the latest updates.",
+          });
         } else {
           throw error;
         }
       } else {
-        toast.success("Successfully subscribed!");
+        toast.success("Welcome aboard! 🎉", {
+          description: "You'll receive the latest updates straight to your inbox.",
+          duration: 5000,
+        });
       }
       setStatus("success");
       setEmail("");
