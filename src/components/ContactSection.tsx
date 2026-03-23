@@ -1,43 +1,87 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { toast } from "sonner";
-import { Mail, Linkedin, Github, Send, ArrowUpRight, Sparkles } from "lucide-react";
+import {
+  Mail,
+  Linkedin,
+  Github,
+  Send,
+  ArrowUpRight,
+  Sparkles,
+  MessageCircle,
+} from "lucide-react";
+import CustomSelect from "./CustomSelect";
 
 const socials = [
   { icon: Mail, label: "aaditya@example.com", href: "mailto:aaditya@example.com" },
   { icon: Linkedin, label: "linkedin.com/in/aaditya", href: "#" },
   { icon: Github, label: "github.com/aaditya", href: "#" },
+  { icon: MessageCircle, label: "Chat on WhatsApp", href: "https://wa.me/91XXXXXXXXXX" },
 ];
 
 const ease = [0.16, 1, 0.3, 1];
 
 const ContactSection = () => {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    project: "",
+    budget: "",
+    message: "",
+  });
+
   const [focused, setFocused] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`);
-    const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\n${form.message}`);
-    window.location.href = `mailto:aaditya@example.com?subject=${subject}&body=${body}`;
-    setForm({ name: "", email: "", message: "" });
-    toast.success("Message ready to send! 🚀", {
-      description: "Your email client should open shortly.",
-      duration: 4000,
-    });
+
+    setLoading(true);
+
+    const subject = encodeURIComponent(`New Project Inquiry from ${form.name}`);
+
+    const body = encodeURIComponent(
+      `Name: ${form.name}
+      Email: ${form.email}
+      Project Type: ${form.project}
+      Budget Range: ${form.budget}
+      Project Details:
+      ${form.message}`
+    );
+
+    setTimeout(() => {
+      window.location.href = `mailto:aaditya@example.com?subject=${subject}&body=${body}`;
+
+      setForm({
+        name: "",
+        email: "",
+        project: "",
+        budget: "",
+        message: "",
+      });
+
+      setLoading(false);
+
+      toast.success("Email ready to send 🚀", {
+        description: "Your email client should open shortly.",
+        duration: 4000,
+      });
+    }, 800);
   };
 
   const inputClass = (field: string) =>
-    `w-full bg-secondary/60 text-foreground placeholder:text-muted-foreground px-4 py-3.5 rounded-xl outline-none transition-all duration-300 border ${
-      focused === field
-        ? "border-primary/40 ring-2 ring-primary/20 bg-secondary/80"
-        : "border-transparent hover:border-border/60"
+    `w-full bg-secondary/60 text-foreground placeholder:text-muted-foreground px-4 py-3.5 rounded-xl outline-none transition-all duration-300 border ${focused === field
+      ? "border-primary/40 ring-2 ring-primary/20 bg-secondary/80"
+      : "border-transparent hover:border-border/60"
     }`;
 
   return (
     <section id="contact" className="section-padding relative">
       <div className="divider-gradient absolute top-0 left-6 right-6" />
+
       <div className="max-w-7xl mx-auto">
+
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -45,16 +89,20 @@ const ContactSection = () => {
           transition={{ duration: 0.6, ease }}
         >
           <p className="font-mono text-primary text-sm mb-2">// Contact</p>
+
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             Let's <span className="text-gradient">build together</span>
           </h2>
+
           <p className="text-muted-foreground max-w-xl mb-16 leading-relaxed">
-            Have a project idea or need a developer? I'd love to hear about it.
+            Have a project in mind or need a modern website? Tell me about it and
+            let's discuss how we can bring it to life.
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12">
-          {/* Info */}
+
+          {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -20, filter: "blur(4px)" }}
             whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
@@ -66,6 +114,7 @@ const ContactSection = () => {
                 <motion.a
                   key={s.label}
                   href={s.href}
+                  target="_blank"
                   initial={{ opacity: 0, x: -12 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -75,13 +124,18 @@ const ContactSection = () => {
                   <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center group-hover:bg-primary/10 transition-colors duration-300">
                     <s.icon size={18} className="group-hover:text-primary transition-colors duration-300" />
                   </div>
+
                   <span className="text-sm font-mono flex-1">{s.label}</span>
-                  <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 text-primary transition-all duration-200 -translate-x-1 group-hover:translate-x-0" />
+
+                  <ArrowUpRight
+                    size={14}
+                    className="opacity-0 group-hover:opacity-100 text-primary transition-all duration-200 -translate-x-1 group-hover:translate-x-0"
+                  />
                 </motion.a>
               ))}
             </div>
-            
-            {/* Quick availability card */}
+
+            {/* Availability Card */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -91,15 +145,19 @@ const ContactSection = () => {
             >
               <div className="flex items-center gap-2 mb-2">
                 <Sparkles className="w-4 h-4 text-primary" />
-                <span className="font-semibold text-sm">Quick Response</span>
+                <span className="font-semibold text-sm">
+                  Available for freelance projects
+                </span>
               </div>
+
               <p className="text-xs text-muted-foreground leading-relaxed">
-                I typically respond within 24 hours. For urgent projects, mention it in your message!
+                I typically respond within 24 hours. If your project is urgent,
+                mention it in your message and I'll prioritize it.
               </p>
             </motion.div>
           </motion.div>
 
-          {/* Form */}
+          {/* Contact Form */}
           <motion.form
             onSubmit={handleSubmit}
             initial={{ opacity: 0, x: 20, filter: "blur(4px)" }}
@@ -118,6 +176,7 @@ const ContactSection = () => {
               className={inputClass("name")}
               required
             />
+
             <input
               type="email"
               placeholder="Your Email"
@@ -128,8 +187,38 @@ const ContactSection = () => {
               className={inputClass("email")}
               required
             />
+
+            {/* Project Type */}
+            <CustomSelect
+              placeholder="Project Type"
+              value={form.project}
+              onChange={(value) => setForm({ ...form, project: value })}
+              options={[
+                "💼 Business Website",
+                "🚀 Landing Page",
+                "⚙️ Web Application",
+                "🔄 Website Redesign",
+                "🤔 Not Sure Yet",
+              ]}
+            />
+
+            {/* Budget */}
+            <CustomSelect
+              placeholder="Budget Range"
+              value={form.budget}
+              onChange={(value) => setForm({ ...form, budget: value })}
+              options={[
+                "₹5,000 – ₹10,000",
+                "₹10,000 – ₹25,000",
+                "₹25,000 – ₹50,000",
+                "₹50,000 – ₹1,00,000",
+                "₹1,00,000+",
+                "Not Sure Yet",
+              ]}
+            />
+
             <textarea
-              placeholder="Tell me about your project..."
+              placeholder="Tell me about your project, goals, and timeline..."
               rows={4}
               value={form.message}
               onChange={(e) => setForm({ ...form, message: e.target.value })}
@@ -138,15 +227,30 @@ const ContactSection = () => {
               className={`${inputClass("message")} resize-none`}
               required
             />
+
+            {/* Submit Button */}
             <button
               type="submit"
-              className="group w-full relative inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3.5 rounded-xl font-medium transition-all duration-300 active:scale-[0.97] overflow-hidden"
+              disabled={loading}
+              className="group w-full relative inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3.5 rounded-xl font-medium transition-all duration-300 active:scale-[0.97] overflow-hidden disabled:opacity-70"
             >
               <span className="relative z-10 flex items-center gap-2">
-                Send Message <Send size={16} className="group-hover:translate-x-0.5 transition-transform duration-200" />
+                {loading ? "Preparing Email..." : "Start Your Project"}
+                {!loading && (
+                  <Send
+                    size={16}
+                    className="group-hover:translate-x-0.5 transition-transform duration-200"
+                  />
+                )}
               </span>
+
               <div className="absolute inset-0 bg-gradient-to-r from-primary via-[hsl(var(--gold-glow))] to-primary bg-[length:200%_100%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-gradient-shift" />
             </button>
+
+            {/* Trust Signals */}
+            <p className="text-xs text-muted-foreground text-center pt-1">
+              Free consultation • Quick response • No commitment required
+            </p>
           </motion.form>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import projectEcommerce from "@/assets/project-ecommerce.jpg";
+import projectEcommerce from "@/assets/GoCart.png";
 import projectPortfolio from "@/assets/project-portfolio.jpg";
 import projectIot from "@/assets/project-iot.jpg";
 import projectTaskmanager from "@/assets/project-taskmanager.jpg";
@@ -21,19 +21,19 @@ export const projects: Project[] = [
     id: "e-commerce-dashboard",
     title: "E-Commerce Dashboard",
     description:
-      "A modern admin dashboard with real-time analytics, inventory management, and responsive charts built for an online store.",
-    longDescription:
-      "Built from the ground up to give store owners complete visibility into their business. The dashboard features real-time sales analytics with interactive Recharts graphs, a full inventory management system with CRUD operations, order tracking with status pipelines, and customer insights. The backend is powered by Node.js with Express and connects to a PostgreSQL database. The responsive layout adapts seamlessly from desktop monitors to tablets.",
-    tags: ["React", "Tailwind CSS", "Recharts", "Node.js"],
+      "Go-Cart is a multivendor e-commerce marketplace where multiple sellers can list products, manage inventory, and process orders from a single platform.",
+    longDescription: "This project is a full-featured Multi-Vendor E-Commerce Platform built with Next.js, developed and designed to deliver a fast and frictionless shopping experience. It integrates secure authentication using Clerk, background job processing with Inngest, and cloud-based image management via ImageKit. All application data is stored in a PostgreSQL database powered by Neon, ensuring reliability and performance. Users can create their own stores and sell products online. Every new store requires admin approval, maintaining platform quality and trust. Seamless login and account management are handled using Clerk, ensuring a smooth and secure user experience. A powerful admin panel allows administrators to: Approve or reject vendor stores, Manage discount coupons, Monitor platform activity, Control vendor permissions. Premium plans are implemented through subscription billing, enabling vendors to unlock advanced features. Product purchases are processed securely using Stripe, supporting modern and reliable payment workflows. After development, the application is deployed for free on Vercel, making it accessible online with high performance and global availability. Think of it as a lightweight Amazon-style interface built specifically for speed, usability, and real-world performance.",
+    tags: ["Next.js", "Tailwind CSS", "Lucide React for icons", "Redux Toolkit"],
     cover_image: projectEcommerce,
     gallery: [projectEcommerce],
-    github_url: "#",
-    live_url: "#",
+    github_url: "https://github.com/Aaditya9187/gocart",
+    live_url: "https://gocart-blush.vercel.app/",
     features: [
       "Real-time sales & revenue analytics",
       "Inventory management with search & filters",
       "Order tracking pipeline",
       "Customer segmentation insights",
+      "Live stripe payment processing",
       "Responsive design for all devices",
     ],
   },

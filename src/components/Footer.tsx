@@ -18,8 +18,8 @@ const Footer = () => {
       <div className="divider-gradient mx-6" />
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 px-6 pt-8">
         <p className="text-sm text-muted-foreground font-mono flex items-center gap-1.5">
-          Built with <Heart size={12} className="text-primary animate-pulse" /> by{" "}
-          <span className="text-gradient font-semibold">&lt;Aaditya /&gt;</span>
+          Built with <Heart size={12} className="text-primary animate-pulse hover:scale-125 transition-transform duration-500" /> by{" "}
+          <span className="text-gradient font-semibold">&lt;Aaditya Chhatraliya /&gt;</span>
         </p>
         <div className="flex items-center gap-1">
           {socials.map((s) => (

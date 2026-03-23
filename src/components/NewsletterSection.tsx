@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mail, ArrowRight, CheckCircle, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -9,6 +9,25 @@ const ease = [0.16, 1, 0.3, 1];
 const NewsletterSection = () => {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0].isIntersecting) {
+        inputRef.current?.focus();
+      }
+    },
+    { threshold: 0.6 }
+  );
+
+  const section = document.getElementById("newsletter");
+
+  if (section) observer.observe(section);
+
+  return () => observer.disconnect();
+}, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,7 +66,7 @@ const NewsletterSection = () => {
   };
 
   return (
-    <section className="section-padding relative overflow-hidden">
+    <section id="newsletter" className="section-padding relative overflow-hidden">
       <div className="absolute inset-0 grid-pattern opacity-30" />
       <motion.div
         animate={{ scale: [1, 1.15, 1], opacity: [0.04, 0.08, 0.04] }}
@@ -71,13 +90,20 @@ const NewsletterSection = () => {
           Get the <span className="text-gradient">latest updates</span>
         </h2>
         <p className="text-muted-foreground mb-8 max-w-md mx-auto leading-relaxed">
-          Subscribe to my newsletter for tips on web development, design insights, and project updates. No spam, ever.
+          Be the first to see my newest projects, website launches, and professional milestones. No spam, ever.
         </p>
+
+        <div className="flex flex-wrap justify-center gap-2 mb-6">
+          <span className="glass px-3 py-1 text-xs rounded-full"> New project launches</span>
+          <span className="glass px-3 py-1 text-xs rounded-full">UI Design</span>
+          <span className="glass px-3 py-1 text-xs rounded-full">Certifications & milestones</span>
+        </div>
 
         {status === "success" ? (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: "spring", stiffness: 260, damping: 20 }}
             className="inline-flex items-center gap-2 glass-strong rounded-xl px-6 py-4 border-glow"
           >
             <CheckCircle size={20} className="text-primary" />
@@ -88,14 +114,17 @@ const NewsletterSection = () => {
             <div className="relative flex-1">
               <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground" />
               <input
-                type="email"
-                placeholder="your@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                disabled={status === "loading"}
-                className="w-full pl-11 pr-4 py-3.5 rounded-xl glass border border-border/50 bg-transparent text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all duration-200 font-mono text-sm"
-                required
-              />
+  ref={inputRef}
+  type="email"
+  placeholder="your@email.com"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  disabled={status === "loading"}
+  pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
+  aria-label="Subscribe to newsletter"
+  className="w-full pl-11 pr-4 py-3.5 rounded-xl glass border border-border/50 bg-transparent text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition-all duration-200 font-mono text-sm"
+  required
+/>
             </div>
             <button
               type="submit"
