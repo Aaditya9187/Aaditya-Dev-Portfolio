@@ -1,7 +1,8 @@
 import { useState, useCallback, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, Calendar } from "lucide-react";
+import MagneticButton from "@/components/MagneticButton";
 import pixelAvatar from "@/assets/avatar-pixel.png";
 import { useTheme } from "@/hooks/use-theme";
 
@@ -96,12 +97,17 @@ const Navbar = () => {
             </button>
           </li>
           <li className="ml-1">
-            <button
-              onClick={() => handleNavClick("/#contact")}
-              className="text-sm bg-primary text-primary-foreground px-5 py-2 rounded-lg font-medium transition-all duration-200 glow-primary active:scale-[0.97]"
-            >
-              Hire Me
-            </button>
+            <MagneticButton strength={0.25}>
+              <a
+                href="https://calendly.com/your-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm inline-flex items-center gap-1.5 bg-primary text-primary-foreground px-5 py-2 rounded-lg font-medium transition-all duration-200 glow-primary active:scale-[0.97]"
+              >
+                <Calendar size={14} />
+                Schedule a Call
+              </a>
+            </MagneticButton>
           </li>
         </ul>
 
@@ -168,12 +174,15 @@ const Navbar = () => {
                 </li>
               ))}
               <li className="mt-2">
-                <button
-                  onClick={() => handleNavClick("/#contact")}
-                  className="w-full bg-primary text-primary-foreground px-4 py-2.5 rounded-lg font-medium text-center active:scale-[0.97] transition-transform"
+                <a
+                  href="https://calendly.com/your-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center gap-1.5 bg-primary text-primary-foreground px-4 py-2.5 rounded-lg font-medium text-center active:scale-[0.97] transition-transform"
                 >
-                  Hire Me
-                </button>
+                  <Calendar size={14} />
+                  Schedule a Call
+                </a>
               </li>
             </ul>
           </motion.div>

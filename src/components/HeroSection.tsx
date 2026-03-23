@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
-import { ArrowDown, Send, Sparkles, Download } from "lucide-react";
+import { ArrowDown, Send, Sparkles, Download, Calendar } from "lucide-react";
 import avatarImg from "@/assets/avatar.png";
 import pixelAvatar from "@/assets/avatar-pixel.png";
 import { useState } from "react";
+import MagneticButton from "@/components/MagneticButton";
 
 const ease = [0.16, 1, 0.3, 1];
 
@@ -90,33 +91,40 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.4, ease }}
             className="flex flex-wrap gap-4"
           >
-            <a
-              href="#projects"
-              onClick={(e) => { e.preventDefault(); document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" }); }}
-              className="group relative inline-flex items-center gap-2 bg-primary text-primary-foreground px-7 py-3.5 rounded-xl font-medium transition-all duration-300 animate-glow-pulse active:scale-[0.97] overflow-hidden"
-            >
-              <span className="relative z-10 flex items-center gap-2">
-                View My Work 
-                <ArrowDown size={16} className="group-hover:translate-y-0.5 transition-transform duration-200" />
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-primary via-[hsl(var(--gold-glow))] to-primary bg-[length:200%_100%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-gradient-shift" />
-            </a>
-            <a
-              href="#contact"
-              onClick={(e) => { e.preventDefault(); document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" }); }}
-              className="group inline-flex items-center gap-2 glass text-foreground px-7 py-3.5 rounded-xl font-medium transition-all duration-300 hover:border-primary/40 active:scale-[0.97] border-glow"
-            >
-              Let's Talk
-              <Send size={16} className="group-hover:translate-x-0.5 transition-transform duration-200" />
-            </a>
-            <a
-              href="/resume.pdf"
-              download
-              className="group inline-flex items-center gap-2 glass text-foreground px-7 py-3.5 rounded-xl font-medium transition-all duration-300 hover:border-primary/40 active:scale-[0.97] border-glow"
-            >
-              Resume
-              <Download size={16} className="group-hover:translate-y-0.5 transition-transform duration-200" />
-            </a>
+            <MagneticButton strength={0.3}>
+              <a
+                href="#projects"
+                onClick={(e) => { e.preventDefault(); document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" }); }}
+                className="group relative inline-flex items-center gap-2 bg-primary text-primary-foreground px-7 py-3.5 rounded-xl font-medium transition-all duration-300 animate-glow-pulse active:scale-[0.97] overflow-hidden"
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  View My Work 
+                  <ArrowDown size={16} className="group-hover:translate-y-0.5 transition-transform duration-200" />
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-primary via-[hsl(var(--gold-glow))] to-primary bg-[length:200%_100%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-gradient-shift" />
+              </a>
+            </MagneticButton>
+            <MagneticButton strength={0.3}>
+              <a
+                href="https://calendly.com/your-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center gap-2 glass text-foreground px-7 py-3.5 rounded-xl font-medium transition-all duration-300 hover:border-primary/40 active:scale-[0.97] border-glow"
+              >
+                <Calendar size={16} className="group-hover:rotate-12 transition-transform duration-200" />
+                Schedule a Call
+              </a>
+            </MagneticButton>
+            <MagneticButton strength={0.3}>
+              <a
+                href="/resume.pdf"
+                download
+                className="group inline-flex items-center gap-2 glass text-foreground px-7 py-3.5 rounded-xl font-medium transition-all duration-300 hover:border-primary/40 active:scale-[0.97] border-glow"
+              >
+                Resume
+                <Download size={16} className="group-hover:translate-y-0.5 transition-transform duration-200" />
+              </a>
+            </MagneticButton>
           </motion.div>
 
           {/* Social proof strip */}
