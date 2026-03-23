@@ -7,12 +7,16 @@ import pixelAvatar from "@/assets/avatar-pixel.png";
 import { useTheme } from "@/hooks/use-theme";
 
 const links = [
-  { label: "Home", href: "/" },
+  { label: "Home", href: "/#home" },
   { label: "About", href: "/#about" },
   { label: "Services", href: "/#services" },
   { label: "Projects", href: "/#projects" },
   { label: "Contact", href: "/#contact" },
 ];
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -48,7 +52,7 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass-strong shadow-lg shadow-background/40' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-        <Link to="/" className="flex items-center gap-2.5">
+        <Link to="/" onClick={scrollToTop} className="flex items-center gap-2.5">
           <img src={pixelAvatar} alt="Aaditya" className="w-8 h-8 rounded-lg ring-1 ring-border/40" />
           <span className="text-lg font-bold font-mono text-gradient">&lt;Aaditya /&gt;</span>
         </Link>
@@ -58,7 +62,10 @@ const Navbar = () => {
           {links.map((l) => (
             <li key={l.href}>
               <button
-                onClick={() => handleNavClick(l.href)}
+                onClick={() => {
+                  if (l.label === "Home") scrollToTop();
+                  handleNavClick(l.href);
+                }}
                 className="text-sm text-muted-foreground hover:text-foreground px-3 py-2 rounded-lg hover:bg-secondary/40 transition-all duration-200"
               >
                 {l.label}

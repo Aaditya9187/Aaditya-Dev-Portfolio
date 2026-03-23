@@ -132,12 +132,12 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.5, ease }}
-            className="flex gap-10 mt-14 pt-8 border-t border-border/40"
+            className="flex gap-10 mt-5 pt-5 border-t border-border/40"
           >
             {[
               { value: "10+", label: "Projects Delivered" },
               { value: "5+", label: "Certifications" },
-              { value: "2+", label: "Years Building" },
+              { value: "4+", label: "Years Building" },
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}
