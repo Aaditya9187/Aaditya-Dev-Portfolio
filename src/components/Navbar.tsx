@@ -1,7 +1,8 @@
 import { useState, useCallback, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, Calendar } from "lucide-react";
+import MagneticButton from "@/components/MagneticButton";
 import pixelAvatar from "@/assets/avatar-pixel.png";
 import { useTheme } from "@/hooks/use-theme";
 
