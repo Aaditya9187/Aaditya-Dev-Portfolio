@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Award } from "lucide-react";
+import { useState } from "react";
 import logoFreecodecamp from "@/assets/logo-freecodecamp.png";
 import logoGoogle from "@/assets/logo-google.png";
 import logoCoursera from "@/assets/logo-coursera.png";
@@ -17,6 +18,8 @@ const certs = [
 const ease = [0.16, 1, 0.3, 1];
 
 const CertificationsSection = () => {
+  const [selectedCert, setSelectedCert] = useState(null);
+
   return (
     <section className="section-padding relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-card/40 via-transparent to-card/40" />
@@ -54,7 +57,8 @@ const CertificationsSection = () => {
               whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.5, delay: i * 0.07, ease }}
-              className="glass rounded-2xl overflow-hidden hover-lift card-shine border-glow group"
+              onClick={() => setSelectedCert(cert)}
+              className="glass rounded-2xl overflow-hidden hover-lift card-shine border-glow group cursor-pointer"
             >
               <div className="relative">
                 <img
@@ -78,6 +82,29 @@ const CertificationsSection = () => {
           ))}
         </div>
       </div>
+
+      <AnimatePresence>
+        {selectedCert && (
+          <motion.div
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 p-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedCert(null)}
+          >
+            <motion.img
+              src={certificateImg}
+              alt={selectedCert.name}
+              className="max-w-4xl w-full rounded-xl shadow-2xl"
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };
