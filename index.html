@@ -1,16 +1,27 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/x-icon" href="/src/assets/avatar-pixel-2.png">
-    <title>Aaditya – Web Developer & Designer</title>
-    <meta name="description" content="Aaditya is a web developer and designer who builds sleek, responsive web experiences that convert visitors into customers." />
-    <meta name="author" content="Aaditya" />
-  </head>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="/src/assets/avatar-pixel-2.png">
+  <title>Aaditya – Web Developer & Designer</title>
+  <meta name="description"
+    content="Aaditya is a web developer and designer who builds sleek, responsive web experiences that convert visitors into customers." />
+  <meta name="author" content="Aaditya" />
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+  <script>
+    const theme = localStorage.getItem("theme");
+    if (theme === "dark") {
+      document.documentElement.classList.remove("light");
+    } else {
+      document.documentElement.classList.add("light");
+    }
+  </script>
+</body>
+
 </html>

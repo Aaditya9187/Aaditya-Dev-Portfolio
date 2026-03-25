@@ -92,6 +92,7 @@ const CertificationsSection = () => {
               <div className="relative h-[220px] overflow-hidden">
 
                 <img
+                  loading="lazy"
                   src={cert.image}
                   alt={cert.name}
                   className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"

@@ -98,6 +98,7 @@ export default function FAQ() {
 
                         {/* Image */}
                         <img
+                            loading="lazy"
                             src={faqImage}
                             alt="Workspace setup"
                             className="relative rounded-2xl border border-border object-cover w-full h-[300px] md:h-full"

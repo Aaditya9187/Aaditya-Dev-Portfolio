@@ -198,6 +198,7 @@ const HeroSection = () => {
 
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-3xl overflow-hidden ring-1 ring-border/40 animate-float">
               <img
+                loading="lazy"
                 src={avatarImg}
                 alt="Aaditya – Web Developer & Designer"
                 className="w-full h-full object-cover transition-all duration-500"
