@@ -7,24 +7,24 @@ import logoSoloLearn from "@/assets/logo-sololearn.png";
 import logoGreatstack from "@/assets/logo-greatstack.png";
 
 import cert1 from "@/assets/Certified-HTML-Developer.png";
-import cert2 from "@/assets/Introduction-to-html.jpg";
+import cert2 from "@/assets/prompt-engineering.jpg";
 import cert3 from "@/assets/Fullstack-Ecommerce-Project.png";
 import cert4 from "@/assets/JavaScript-Fundamentals.png";
 import cert5 from "@/assets/React-Hooks-Crash-Course.png";
 import cert6 from "@/assets/machine-learning-for-beginners.jpg";
 import cert7 from "@/assets/project-planning-with-ai.jpg";
-import cert8 from "@/assets/prompt-engineering.jpg";
+import cert8 from "@/assets/Introduction-to-html.jpg";
 import cert9 from "@/assets/vibe-coding.jpg";
 
 const certs = [
   { name: "Certified HTML Developer", issuer: "W3Schools", logo: logoW3Schools, year: "2022", image: cert1 },
-  { name: "Introduction To HTML", issuer: "Sololearn", logo: logoSoloLearn, year: "2025", image: cert2 },
+  { name: "Prompt Engineering", issuer: "Sololearn", logo: logoSoloLearn, year: "2025", image: cert2 },
   { name: "Fullstack Ecommerce Project", issuer: "Greatstack", logo: logoGreatstack, year: "2026", image: cert3 },
   { name: "JavaScript Fundamentals", issuer: "Greatstack", logo: logoGreatstack, year: "2026", image: cert4 },
   { name: "React Hooks Crash Course", issuer: "Greatstack", logo: logoGreatstack, year: "2026", image: cert5 },
   { name: "Machine Learning For Beginners", issuer: "SoloLearn", logo: logoSoloLearn, year: "2025", image: cert6 },
   { name: "Project Planning With AI", issuer: "Sololearn", logo: logoSoloLearn, year: "2025", image: cert7 },
-  { name: "Prompt Engineering", issuer: "Sololearn", logo: logoSoloLearn, year: "2025", image: cert8 },
+  { name: "Introduction To HTML", issuer: "Sololearn", logo: logoSoloLearn, year: "2025", image: cert8 },
   { name: "Vibe Coding", issuer: "SoloLearn", logo: logoSoloLearn, year: "2026", image: cert9 },
 ];
 

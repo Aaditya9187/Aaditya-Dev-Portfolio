@@ -40,8 +40,8 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: "portfolio-website",
-    title: "Portfolio Website",
+    id: "macos-portfolio-website",
+    title: "MacOsPortfolio Website",
     description:
       "A macOS-inspired interactive developer portfolio with draggable windows, built-in apps, and smooth GSAP animations to showcase projects and skills. 💻🚀",
     longDescription:
