@@ -13,10 +13,10 @@ import {
 import CustomSelect from "./CustomSelect";
 
 const socials = [
-  { icon: Mail, label: "aaditya@example.com", href: "mailto:aaditya@example.com" },
-  { icon: Linkedin, label: "linkedin.com/in/aaditya", href: "#" },
-  { icon: Github, label: "github.com/aaditya", href: "#" },
-  { icon: MessageCircle, label: "Chat on WhatsApp", href: "https://wa.me/91XXXXXXXXXX" },
+  { icon: Mail, label: "aaditya.c@gmail.com", href: "mailto:aaditya.chhatraliya@gmail.com" },
+  { icon: Linkedin, label: "linkedin.com/in/aaditya.c", href: "https://www.linkedin.com/in/aaditya-chhatraliya-2b8981392" },
+  { icon: Github, label: "github.com/aaditya.c", href: "https://github.com/Aaditya9187" },
+  { icon: MessageCircle, label: "Chat on WhatsApp", href: "https://wa.me/918758977845" },
 ];
 
 const ease = [0.16, 1, 0.3, 1];
@@ -33,24 +33,33 @@ const ContactSection = () => {
   const [focused, setFocused] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     setLoading(true);
 
-    const subject = encodeURIComponent(`New Project Inquiry from ${form.name}`);
+    const formData = new FormData();
 
-    const body = encodeURIComponent(
-      `Name: ${form.name}
-      Email: ${form.email}
-      Project Type: ${form.project}
-      Budget Range: ${form.budget}
-      Project Details:
-      ${form.message}`
-    );
+    formData.append("access_key", "25419b85-570d-48b2-876c-bc768763be94");
+    formData.append("name", form.name);
+    formData.append("email", form.email);
+    formData.append("message", form.message);
+    formData.append("subject", `New Project Inquiry from ${form.name}`);
 
-    setTimeout(() => {
-      window.location.href = `mailto:aaditya@example.com?subject=${subject}&body=${body}`;
+    if (form.project) formData.append("project_type", form.project);
+    if (form.budget) formData.append("budget_range", form.budget);
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData,
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      toast.success("Message sent successfully 🚀", {
+        description: "I'll get back to you within 24 hours.",
+        duration: 4000,
+      });
 
       setForm({
         name: "",
@@ -59,20 +68,20 @@ const ContactSection = () => {
         budget: "",
         message: "",
       });
-
-      setLoading(false);
-
-      toast.success("Email ready to send 🚀", {
-        description: "Your email client should open shortly.",
-        duration: 4000,
+    } else {
+      toast.error("Something went wrong", {
+        description: "Please try again later.",
       });
-    }, 800);
+    }
+
+    setLoading(false);
   };
 
   const inputClass = (field: string) =>
-    `w-full bg-secondary/60 text-foreground placeholder:text-muted-foreground px-4 py-3.5 rounded-xl outline-none transition-all duration-300 border ${focused === field
-      ? "border-primary/40 ring-2 ring-primary/20 bg-secondary/80"
-      : "border-transparent hover:border-border/60"
+    `w-full bg-secondary/60 text-foreground placeholder:text-muted-foreground px-4 py-3.5 rounded-xl outline-none transition-all duration-300 border ${
+      focused === field
+        ? "border-primary/40 ring-2 ring-primary/20 bg-secondary/80"
+        : "border-transparent hover:border-border/60"
     }`;
 
   return (
@@ -81,7 +90,6 @@ const ContactSection = () => {
 
       <div className="max-w-7xl mx-auto">
 
-        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
           whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -102,7 +110,6 @@ const ContactSection = () => {
 
         <div className="grid md:grid-cols-2 gap-12">
 
-          {/* Contact Info */}
           <motion.div
             initial={{ opacity: 0, x: -20, filter: "blur(4px)" }}
             whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
@@ -135,7 +142,6 @@ const ContactSection = () => {
               ))}
             </div>
 
-            {/* Availability Card */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -157,7 +163,6 @@ const ContactSection = () => {
             </motion.div>
           </motion.div>
 
-          {/* Contact Form */}
           <motion.form
             onSubmit={handleSubmit}
             initial={{ opacity: 0, x: 20, filter: "blur(4px)" }}
@@ -166,6 +171,9 @@ const ContactSection = () => {
             transition={{ duration: 0.6, delay: 0.1, ease }}
             className="glass rounded-2xl p-7 md:p-8 space-y-4 border-glow"
           >
+
+            <input type="checkbox" name="botcheck" className="hidden" style={{ display: "none" }} />
+
             <input
               type="text"
               placeholder="Your Name"
@@ -188,9 +196,8 @@ const ContactSection = () => {
               required
             />
 
-            {/* Project Type */}
             <CustomSelect
-              placeholder="Project Type"
+              placeholder="Project Type (Optional)"
               value={form.project}
               onChange={(value) => setForm({ ...form, project: value })}
               options={[
@@ -202,9 +209,8 @@ const ContactSection = () => {
               ]}
             />
 
-            {/* Budget */}
             <CustomSelect
-              placeholder="Budget Range"
+              placeholder="Budget Range (Optional)"
               value={form.budget}
               onChange={(value) => setForm({ ...form, budget: value })}
               options={[
@@ -228,14 +234,13 @@ const ContactSection = () => {
               required
             />
 
-            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
               className="group w-full relative inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground px-6 py-3.5 rounded-xl font-medium transition-all duration-300 active:scale-[0.97] overflow-hidden disabled:opacity-70"
             >
               <span className="relative z-10 flex items-center gap-2">
-                {loading ? "Preparing Email..." : "Start Your Project"}
+                {loading ? "Sending Message..." : "Start Your Project"}
                 {!loading && (
                   <Send
                     size={16}
@@ -247,7 +252,6 @@ const ContactSection = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-primary via-[hsl(var(--gold-glow))] to-primary bg-[length:200%_100%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-gradient-shift" />
             </button>
 
-            {/* Trust Signals */}
             <p className="text-xs text-muted-foreground text-center pt-1">
               Free consultation • Quick response • No commitment required
             </p>

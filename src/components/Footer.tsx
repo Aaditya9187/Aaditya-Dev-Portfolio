@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter, Instagram, Heart, ArrowUp } from "lucide-react";
+import { Github, Linkedin, MessageCircle, Mail, Heart, ArrowUp } from "lucide-react";
 
 const socials = [
-  { icon: Github, href: "#", label: "GitHub" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Instagram, href: "#", label: "Instagram" },
+  { icon: Github, href: "https://github.com/Aaditya9187", label: "GitHub" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/aaditya-chhatraliya-2b8981392", label: "LinkedIn" },
+  { icon: MessageCircle, href: "https://wa.me/918758977845", label: "WhatsApp" },
+  { icon: Mail, href: "mailto:aaditya.chhatraliya@gmail.com", label: "Email" },
 ];
 
 const Footer = () => {
