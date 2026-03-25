@@ -75,7 +75,7 @@ const AboutSection = () => {
             
             {/* Mini skill tags */}
             <div className="flex flex-wrap gap-2">
-              {["React", "TypeScript", "Node.js", "Figma", "Tailwind", "IoT"].map((tag) => (
+              {["Javascript Master", "PERN Stack", "MERN Stack", "Figma", "Canva", "IoT"].map((tag) => (
                 <span key={tag} className="text-xs font-mono bg-secondary/80 text-secondary-foreground px-3 py-1.5 rounded-full border border-border/30 hover:border-primary/30 hover:text-primary transition-colors duration-300 cursor-default">
                   {tag}
                 </span>

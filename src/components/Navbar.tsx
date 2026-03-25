@@ -106,7 +106,7 @@ const Navbar = () => {
           <li className="ml-1">
             <MagneticButton strength={0.25}>
               <a
-                href="https://calendly.com/your-link"
+                href="https://calendly.com/aaditya-chhatraliya/30min"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm inline-flex items-center gap-1.5 bg-primary text-primary-foreground px-5 py-2 rounded-lg font-medium transition-all duration-200 glow-primary active:scale-[0.97]"
