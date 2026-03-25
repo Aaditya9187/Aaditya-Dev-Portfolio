@@ -13,9 +13,9 @@ import {
 import CustomSelect from "./CustomSelect";
 
 const socials = [
-  { icon: Mail, label: "aaditya.c@gmail.com", href: "mailto:aaditya.chhatraliya@gmail.com" },
-  { icon: Linkedin, label: "linkedin.com/in/aaditya.c", href: "https://www.linkedin.com/in/aaditya-chhatraliya-2b8981392" },
-  { icon: Github, label: "github.com/aaditya.c", href: "https://github.com/Aaditya9187" },
+  { icon: Mail, label: "aaditya.ch@gmail.com", href: "mailto:aaditya.chhatraliya@gmail.com" },
+  { icon: Linkedin, label: "linkedin.com/in/aaditya.ch", href: "https://www.linkedin.com/in/aaditya-chhatraliya-2b8981392" },
+  { icon: Github, label: "github.com/aaditya.ch", href: "https://github.com/Aaditya9187" },
   { icon: MessageCircle, label: "Chat on WhatsApp", href: "https://wa.me/918758977845" },
 ];
 

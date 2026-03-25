@@ -32,7 +32,7 @@ const faqs = [
     {
         question: "How can we start working together?",
         answer:
-            "Simply fill out the contact form below with your project details. I will review your requirements and get back to you to discuss the next steps."
+            "Simply fill out the contact form below with your project details or else you can also schedule a call by clicking the button in the navbar. I will review your requirements and get back to you to discuss the next steps."
     },
     {
         question: "Do you also provide website maintenance after launch?",
@@ -88,10 +88,10 @@ export default function FAQ() {
                 </motion.div>
 
                 {/* FAQ Grid */}
-                <div className="grid md:grid-cols-2 gap-12 items-start">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
 
                     {/* Image */}
-                    <div className="hidden md:block relative">
+                    <div className="relative order-1 md:order-none mb-10 md:mb-0">
 
                         {/* Glow layer */}
                         <div className="absolute -inset-6 bg-primary/30 blur-[80px] opacity-60 rounded-3xl"></div>
@@ -100,14 +100,14 @@ export default function FAQ() {
                         <img
                             src={faqImage}
                             alt="Workspace setup"
-                            className="relative rounded-2xl border border-border object-cover w-full h-full"
+                            className="relative rounded-2xl border border-border object-cover w-full h-[300px] md:h-full"
                         />
 
                     </div>
 
                     {/* Questions */}
                     <motion.div
-                        className="space-y-4"
+                        className="space-y-4 order-2 md:order-none"
                         initial="hidden"
                         whileInView="show"
                         viewport={{ once: true }}

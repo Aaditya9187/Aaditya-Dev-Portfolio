@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Sun, Moon, Calendar } from "lucide-react";
+import { Menu, X, Sun, Moon, Calendar, ExternalLink } from "lucide-react";
 import MagneticButton from "@/components/MagneticButton";
 import pixelAvatar from "@/assets/avatar-pixel-2.png";
 import { useTheme } from "@/hooks/use-theme";
@@ -12,6 +12,9 @@ const links = [
   { label: "Services", href: "/#services" },
   { label: "Projects", href: "/#projects" },
   { label: "Contact", href: "/#contact" },
+
+  // External blog link
+  { label: "Blogs", href: "https://your-blog-website.com", external: true }
 ];
 
 const scrollToTop = () => {
@@ -54,7 +57,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         <Link to="/" onClick={scrollToTop} className="flex items-center gap-2.5">
           <img src={pixelAvatar} alt="Aaditya" className="w-8 h-8 rounded-lg ring-1 ring-border/40" />
-          <span className="text-lg font-bold font-mono text-gradient">&lt;Aaditya C /&gt;</span>
+          <span className="text-lg font-bold font-mono text-gradient">&lt;Aaditya Ch /&gt;</span>
         </Link>
 
         {/* Desktop */}
@@ -64,11 +67,14 @@ const Navbar = () => {
               <button
                 onClick={() => {
                   if (l.label === "Home") scrollToTop();
-                  handleNavClick(l.href);
+                  handleNavClick(l.href, l.external);
                 }}
                 className="text-sm text-muted-foreground hover:text-foreground px-3 py-2 rounded-lg hover:bg-secondary/40 transition-all duration-200"
               >
-                {l.label}
+                <span className="flex items-center gap-1">
+                  {l.label}
+                  {l.external && <ExternalLink size={12} className="opacity-60" />}
+                </span>
               </button>
             </li>
           ))}
@@ -173,10 +179,13 @@ const Navbar = () => {
               {links.map((l) => (
                 <li key={l.href}>
                   <button
-                    onClick={() => handleNavClick(l.href)}
+                    onClick={() => handleNavClick(l.href, l.external)}
                     className="w-full text-left text-muted-foreground hover:text-foreground px-3 py-2.5 rounded-lg hover:bg-secondary/40 transition-all duration-200"
                   >
-                    {l.label}
+                    <span className="flex items-center gap-1">
+                      {l.label}
+                      {l.external && <ExternalLink size={12} className="opacity-60" />}
+                    </span>
                   </button>
                 </li>
               ))}
