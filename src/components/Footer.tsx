@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Github, Linkedin, MessageCircle, Mail, Heart, ArrowUp } from "lucide-react";
 
 const socials = [
