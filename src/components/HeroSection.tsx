@@ -2,18 +2,43 @@ import { motion } from "framer-motion";
 import { ArrowDown, Send, Sparkles, Download, Calendar } from "lucide-react";
 import avatarImg from "@/assets/avatar.png";
 import pixelAvatar from "@/assets/avatar-pixel.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MagneticButton from "@/components/MagneticButton";
 
 const ease = [0.16, 1, 0.3, 1];
 
+const Counter = ({ value }) => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let start = 0;
+    const end = parseInt(value);
+    const duration = 1200;
+    const incrementTime = 20;
+    const step = end / (duration / incrementTime);
+
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= end) {
+        start = end;
+        clearInterval(timer);
+      }
+      setCount(Math.floor(start));
+    }, incrementTime);
+
+    return () => clearInterval(timer);
+  }, [value]);
+
+  return <>{count}+</>;
+};
+
 const HeroSection = () => {
-  
+
   return (
     <section className="min-h-screen flex items-center section-padding pt-28 relative overflow-hidden">
       {/* Grid pattern background */}
       <div className="absolute inset-0 grid-pattern opacity-40" />
-      
+
       {/* Animated orbs */}
       <motion.div
         animate={{ scale: [1, 1.2, 1], opacity: [0.06, 0.12, 0.06] }}
@@ -80,7 +105,7 @@ const HeroSection = () => {
             transition={{ duration: 0.6, delay: 0.25, ease }}
             className="text-muted-foreground text-lg max-w-lg mb-10 leading-relaxed"
           >
-            Full-stack developer crafting performant, beautiful interfaces 
+            Full-stack developer crafting performant, beautiful interfaces
             that turn visitors into loyal customers.
           </motion.p>
 
@@ -97,7 +122,7 @@ const HeroSection = () => {
                 className="group relative inline-flex items-center gap-2 bg-primary text-primary-foreground px-7 py-3.5 rounded-xl font-medium transition-all duration-2000 animate-glow-pulse active:scale-[0.97] overflow-hidden"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  View My Work 
+                  View My Work
                   <ArrowDown size={16} className="group-hover:translate-y-0.5 transition-transform duration-200" />
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-primary via-[hsl(var(--gold-glow))] to-primary bg-[length:200%_100%] opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-gradient-shift" />
@@ -116,7 +141,7 @@ const HeroSection = () => {
             </MagneticButton>
             <MagneticButton strength={0.3}>
               <a
-                href="/resume.pdf"
+                href="/Aaditya's-Resume.pdf"
                 download
                 className="group inline-flex items-center gap-2 glass text-foreground px-7 py-3.5 rounded-xl font-medium transition-all duration-300 hover:border-primary/40 active:scale-[0.97] border-glow"
               >
@@ -134,9 +159,9 @@ const HeroSection = () => {
             className="flex gap-10 mt-5 pt-5 border-t border-border/40"
           >
             {[
-              { value: "10+", label: "Projects Delivered" },
-              { value: "5+", label: "Certifications" },
-              { value: "4+", label: "Years Building" },
+              { value: 10, label: "Projects Delivered" },
+              { value: 5, label: "Certifications" },
+              { value: 4, label: "Years Building" },
             ].map((stat, i) => (
               <motion.div
                 key={stat.label}
@@ -145,7 +170,7 @@ const HeroSection = () => {
                 transition={{ delay: 0.8 + i * 0.1, duration: 0.4, ease }}
                 className="group cursor-default"
               >
-                <p className="text-2xl font-bold text-gradient tabular-nums group-hover:scale-110 transition-transform duration-300 origin-left">{stat.value}</p>
+                <p className="text-2xl font-bold text-gradient tabular-nums group-hover:scale-110 transition-transform duration-300 origin-left"><Counter value={stat.value} /></p>
                 <p className="text-xs text-muted-foreground font-mono mt-1.5">{stat.label}</p>
               </motion.div>
             ))}
@@ -165,24 +190,24 @@ const HeroSection = () => {
             <div className="absolute -inset-8 rounded-[2.5rem] border border-dashed border-primary/5 animate-rotate-slow" style={{ animationDirection: "reverse", animationDuration: "30s" }} />
 
             {/* Soft glow behind */}
-            <motion.div 
+            <motion.div
               animate={{ scale: 1.25 }}
               transition={{ duration: 0.5 }}
               className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/20 via-primary/5 to-transparent blur-3xl"
             />
-            
+
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-3xl overflow-hidden ring-1 ring-border/40 animate-float">
               <img
                 src={avatarImg}
                 alt="Aaditya – Web Developer & Designer"
                 className="w-full h-full object-cover transition-all duration-500"
-               style={{ imageRendering: "auto" }}
+                style={{ imageRendering: "auto" }}
               />
               {/* Bottom vignette */}
               <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-transparent to-transparent" />
-              
+
               {/* Hover overlay */}
-              <motion.div 
+              <motion.div
                 animate={{ opacity: 0 }}
                 className="absolute inset-0 bg-primary"
               />

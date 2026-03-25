@@ -54,7 +54,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         <Link to="/" onClick={scrollToTop} className="flex items-center gap-2.5">
           <img src={pixelAvatar} alt="Aaditya" className="w-8 h-8 rounded-lg ring-1 ring-border/40" />
-          <span className="text-lg font-bold font-mono text-gradient">&lt;Aaditya /&gt;</span>
+          <span className="text-lg font-bold font-mono text-gradient">&lt;Aaditya C /&gt;</span>
         </Link>
 
         {/* Desktop */}
