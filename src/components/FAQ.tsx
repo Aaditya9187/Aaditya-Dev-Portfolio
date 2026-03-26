@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, HelpCircle } from "lucide-react";
-import faqImage from "@/assets/faq-image.webp";
+import faqImage from "@/assets/faq-image.jpg";
 
 const faqs = [
     {
