@@ -1,9 +1,9 @@
-import projectEcommerce from "@/assets/GoCart.png";
-import projectPortfolio from "@/assets/maos-portfolio.png";
-import projectFittrack from "@/assets/FitTrack.png";
-import projectSpott from "@/assets/Spott.png";
-import projectSkywings from "@/assets/skywings.png"
-import projectStarbucks from "@/assets/Starbucks-landing-page.png"
+import projectEcommerce from "@/assets/GoCart.webp";
+import projectPortfolio from "@/assets/maos-portfolio.webp";
+import projectFittrack from "@/assets/FitTrack.webp";
+import projectSpott from "@/assets/Spott.webp";
+import projectSkywings from "@/assets/skywings.webp"
+import projectStarbucks from "@/assets/Starbucks-landing-page.webp"
 
 export interface Project {
   id: string;

@@ -2,19 +2,19 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Award, X, ChevronDown, ChevronUp } from "lucide-react";
 import { useState } from "react";
 
-import logoW3Schools from "@/assets/logo-w3schools.png";
-import logoSoloLearn from "@/assets/logo-sololearn.png";
-import logoGreatstack from "@/assets/logo-greatstack.png";
+import logoW3Schools from "@/assets/logo-w3schools.webp";
+import logoSoloLearn from "@/assets/logo-sololearn.webp";
+import logoGreatstack from "@/assets/logo-greatstack.webp";
 
-import cert1 from "@/assets/Certified-HTML-Developer.png";
-import cert2 from "@/assets/prompt-engineering.jpg";
-import cert3 from "@/assets/Fullstack-Ecommerce-Project.png";
-import cert4 from "@/assets/JavaScript-Fundamentals.png";
-import cert5 from "@/assets/React-Hooks-Crash-Course.png";
-import cert6 from "@/assets/machine-learning-for-beginners.jpg";
-import cert7 from "@/assets/project-planning-with-ai.jpg";
-import cert8 from "@/assets/Introduction-to-html.jpg";
-import cert9 from "@/assets/vibe-coding.jpg";
+import cert1 from "@/assets/Certified-HTML-Developer.webp";
+import cert2 from "@/assets/prompt-engineering.webp";
+import cert3 from "@/assets/Fullstack-Ecommerce-Project.webp";
+import cert4 from "@/assets/JavaScript-Fundamentals.webp";
+import cert5 from "@/assets/React-Hooks-Crash-Course.webp";
+import cert6 from "@/assets/machine-learning-for-beginners.webp";
+import cert7 from "@/assets/project-planning-with-ai.webp";
+import cert8 from "@/assets/Introduction-to-html.webp";
+import cert9 from "@/assets/vibe-coding.webp";
 
 const certs = [
   { name: "Certified HTML Developer", issuer: "W3Schools", logo: logoW3Schools, year: "2022", image: cert1 },
