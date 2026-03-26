@@ -176,7 +176,7 @@ const HeroSection = () => {
           </motion.div>
         </div>
 
-        {/* Avatar with hover swap */}
+        {/* Avatar Image */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9, filter: "blur(8px)" }}
           animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
@@ -197,7 +197,7 @@ const HeroSection = () => {
 
             <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-3xl overflow-hidden ring-1 ring-border/40 animate-float">
               <img
-                loading="lazy"
+                loading="eager"
                 src={avatarImg}
                 alt="Aaditya – Web Developer & Designer"
                 className="w-full h-full object-cover transition-all duration-500"
