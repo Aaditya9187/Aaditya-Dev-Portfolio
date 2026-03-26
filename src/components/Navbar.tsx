@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon, Calendar, ExternalLink } from "lucide-react";
 import MagneticButton from "@/components/MagneticButton";
-import pixelAvatar from "@/assets/avatar-pixel-2.png";
+import pixelAvatar from "@/assets/avatar-pixel-2.webp";
 import { useTheme } from "@/hooks/use-theme";
 
 const links = [
@@ -56,7 +56,7 @@ const Navbar = () => {
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'glass-strong shadow-lg shadow-background/40' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         <Link to="/" onClick={scrollToTop} className="flex items-center gap-2.5">
-          <img src={pixelAvatar} alt="Aaditya" className="w-8 h-8 rounded-lg ring-1 ring-border/40" />
+          <img src={pixelAvatar} loading="lazy" alt="Aaditya" className="w-8 h-8 rounded-lg ring-1 ring-border/40" />
           <span className="text-lg font-bold font-mono text-gradient">&lt;Aaditya Ch /&gt;</span>
         </Link>
 
