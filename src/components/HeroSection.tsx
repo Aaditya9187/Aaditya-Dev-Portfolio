@@ -79,9 +79,9 @@ const HeroSection = () => {
           </motion.div>
 
           <motion.h1
-            // initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
-            // animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-            // transition={{ duration: 1 }}
+            initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            transition={{ duration: 1 }}
             className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] mb-6 tracking-tight"
           >
             I design & build<br />
