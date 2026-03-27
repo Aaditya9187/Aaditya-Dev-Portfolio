@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Send, Sparkles, Download, Calendar } from "lucide-react";
-import avatarImg from "@/assets/avatar.webp";
+import avatarImg from "@/assets/avatar.png";
 import { useEffect, useState } from "react";
 import MagneticButton from "@/components/MagneticButton";
 

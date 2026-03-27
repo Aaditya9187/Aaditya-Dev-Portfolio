@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Code2, Cpu, Trophy, Gamepad2 } from "lucide-react";
-import avatarImg from "@/assets/avatar2.webp";
+import avatarImg from "@/assets/avatar2.png";
 
 const highlights = [
   { icon: Code2, label: "Web Development", desc: "Building modern, responsive applications", color: "from-primary/20 to-primary/5" },

@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon, Calendar, ExternalLink } from "lucide-react";
 import MagneticButton from "@/components/MagneticButton";
-import pixelAvatar from "@/assets/avatar-pixel-small.webp";
+import pixelAvatar from "@/assets/avatar-pixel-2.png";
 import { useTheme } from "@/hooks/use-theme";
 
 const links = [
@@ -14,7 +14,7 @@ const links = [
   { label: "Contact", href: "/#contact" },
 
   // External blog link
-  { label: "Blogs", href: "https://your-blog-website.com", external: true }
+  { label: "Blogs", href: "https://blog-website.com", external: true }
 ];
 
 const scrollToTop = () => {
