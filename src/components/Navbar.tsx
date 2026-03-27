@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon, Calendar, ExternalLink } from "lucide-react";
 import MagneticButton from "@/components/MagneticButton";
-import pixelAvatar from "@/assets/avatar-pixel-2.png";
+import pixelAvatar from "@/assets/avatar-pixel-2.webp";
 import { useTheme } from "@/hooks/use-theme";
 
 const links = [
