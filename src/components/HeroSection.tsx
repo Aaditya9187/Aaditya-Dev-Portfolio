@@ -84,9 +84,9 @@ const HeroSection = () => {
             transition={{ duration: 1 }}
             className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-[1.05] mb-6 tracking-tight"
           >
-            I design & build<br />
+            A code that<br />
             <span className="text-gradient relative">
-              web experiences
+              works, A design
               <motion.span
                 className="absolute -top-2 -right-6"
                 animate={{ rotate: [0, 15, -15, 0], scale: [1, 1.2, 1] }}
@@ -95,7 +95,7 @@ const HeroSection = () => {
                 <Sparkles className="w-5 h-5 text-primary" />
               </motion.span>
             </span><br />
-            <span className="text-muted-foreground">that convert.</span>
+            <span className="text-muted-foreground">that speaks.</span>
           </motion.h1>
 
           <motion.p
