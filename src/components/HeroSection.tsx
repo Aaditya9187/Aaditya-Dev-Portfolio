@@ -159,7 +159,7 @@ const HeroSection = () => {
           >
             {[
               { value: 10, label: "Projects Delivered" },
-              { value: 5, label: "Certifications" },
+              { value: 8, label: "Certifications" },
               { value: 4, label: "Years Building" },
             ].map((stat, i) => (
               <motion.div
